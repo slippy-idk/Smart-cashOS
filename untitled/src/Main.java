@@ -34,8 +34,7 @@ Menu();
 
         switch (input){
             case "1":
-                System.out.println("Employee"); //tbd
-                break;
+                User.Login();
 
 
 
