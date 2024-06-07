@@ -16,14 +16,14 @@ public class Main {
     public static void main(String[] args) {
 
 
-Login();
+Menu();
 
 
 
 
     }
 
-    public static void Login(){
+    public static void Menu(){
 
         System.out.println("What user would you like to login as");
         System.out.println("1: Employee");
@@ -37,12 +37,14 @@ Login();
                 System.out.println("Employee"); //tbd
                 break;
 
+
+
             case "2":
                 Administrator();
 
             default:
                 System.out.println("You entered A wrong input try again");
-                Login();
+                Menu();
         }
 
     }
@@ -65,7 +67,7 @@ Login();
                 User.View_Account();
 
             case "3":
-                Login();
+                Menu();
 
             default:
                 System.out.println("You entered an incorrect Input try again");

@@ -79,7 +79,7 @@ public class User implements Serializable {
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
                 User Temp_User = (User) objectInputStream.readObject();
-                if (Temp_User.Name.equals(name)) {
+                if (Temp_User.Name.equals(name.toLowerCase())) {
                     System.out.println(Temp_User);
                     Main.Administrator();
                 }
@@ -97,6 +97,12 @@ public class User implements Serializable {
         }
 
 
+
+    }
+
+    public static void Login (){
+        System.out.println("Please enter your name");
+        Main.t
 
     }
 
