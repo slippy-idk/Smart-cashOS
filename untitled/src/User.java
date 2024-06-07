@@ -6,7 +6,7 @@ public class User implements Serializable {
 
     private long HoursWorked;
 
-    private  long GrossEarning;
+    private  double GrossEarning;
 
     public String getName() {
         return Name;
@@ -16,7 +16,7 @@ public class User implements Serializable {
         return HoursWorked;
     }
 
-    public long getGrossEarning() {
+    public double getGrossEarning() {
         return GrossEarning;
     }
 
@@ -32,7 +32,7 @@ public class User implements Serializable {
         HoursWorked = hoursWorked;
     }
 
-    public void setGrossEarning(long grossEarning) {
+    public void setGrossEarning(double grossEarning) {
         GrossEarning = grossEarning;
     }
 
@@ -151,7 +151,7 @@ public class User implements Serializable {
                     System.out.println(" "); // used to space out for readability
                     System.out.println("What is the Amount of Money Paid");
                     System.out.println("Enter 0 to END sales");
-                    long Payment = Main.User_Input.nextInt();
+                    double Payment = Main.User_Input.nextDouble();
 
                     if(Payment == 0){
                         employee_Start(User, Start_Shift);
