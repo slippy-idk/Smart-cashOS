@@ -6,7 +6,7 @@ public class User implements Serializable {
 
     private long HoursWorked;
 
-    private  int GrossEarning;
+    private  long GrossEarning;
 
     public String getName() {
         return Name;
@@ -16,7 +16,7 @@ public class User implements Serializable {
         return HoursWorked;
     }
 
-    public int getGrossEarning() {
+    public long getGrossEarning() {
         return GrossEarning;
     }
 
@@ -32,7 +32,7 @@ public class User implements Serializable {
         HoursWorked = hoursWorked;
     }
 
-    public void setGrossEarning(int grossEarning) {
+    public void setGrossEarning(long grossEarning) {
         GrossEarning = grossEarning;
     }
 
@@ -110,7 +110,8 @@ public class User implements Serializable {
 
                 User Temp_User = (User) objectInputStream.readObject();
                 if (Temp_User.Name.equals(name.toLowerCase())) {
-                    Temp_User.employee_Start(Temp_User);
+                    long Start_Shift = System.currentTimeMillis();
+                    Temp_User.employee_Start(Temp_User, Start_Shift);
                 }
             } while (true);
 
@@ -130,12 +131,11 @@ public class User implements Serializable {
     }
 
 
-    public  void employee_Start(User args){
-
-        long Start_Shift = System.currentTimeMillis(); //this variable is to keep track of the current time for working out hours worked
+    public void employee_Start(User User, long Start_Shift){
 
 
         System.out.println("What would you like to do");
+        System.out.println("1: Start Sale");
         System.out.println("END: end your shift on console");
 
         Main.input = Main.User_Input.nextLine();
@@ -143,7 +143,29 @@ public class User implements Serializable {
 
         switch (Main.input.toLowerCase()){
             case "end":
-                End_shift(args, Start_Shift);
+                End_shift(User, Start_Shift);
+
+
+            case "1":
+                do {
+                    System.out.println(" "); // used to space out for readability
+                    System.out.println("What is the Amount of Money Paid");
+                    System.out.println("Enter 0 to END sales");
+                    long Payment = Main.User_Input.nextInt();
+
+                    if(Payment == 0){
+                        employee_Start(User, Start_Shift);
+                    }
+
+                    User.setGrossEarning(User.getGrossEarning() + Payment);
+
+
+                }while (true);
+
+
+default:
+    System.out.println("You entered the Wrong character try again");
+    employee_Start(User, Start_Shift);
 
 
 
@@ -167,6 +189,9 @@ public class User implements Serializable {
         System.out.println("You have worked this amount of Hours");
         System.out.println(User.getHoursWorked());
 
+        System.out.println("You Gross Earnings is");
+        System.out.println(User.getGrossEarning());
+
 
         System.out.println(" "); // used to space menu and the end shift screen
         Main.Menu();//returns the User to the Menu to not trigger an Io error
@@ -177,5 +202,22 @@ public class User implements Serializable {
 
 
     }
+
+
+//    public void Sale (User User){
+//        long Start_Shift = System.currentTimeMillis();
+//
+//        do {
+//            System.out.println("What is the Amount of Money Paid");
+//            System.out.println("Enter 00 to END sales");
+//            int Payment = Main.User_Input.nextInt();
+//
+//            User.setGrossEarning(User.getGrossEarning() + Payment);
+//
+//
+//            employee_Start(User);
+//        }while (true);
+//
+//    }
 
 }
