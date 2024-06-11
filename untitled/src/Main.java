@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 /**
  * @author Lewis Perry Nickname = Slippy
  *
@@ -75,6 +76,50 @@ Menu();
 
     }
 
+//    public void start(Stage stage) throws IOException { //this is the start of the gui and login menu
+//        Group group = new Group();
+//        Scene scene = new Scene(group, 400, 400);
+//        stage.setTitle("Login");
+//
+//
+//        //grid
+//        StackPane stackPane = new StackPane();
+//
+//
+//
+//
+//
+//
+//        //Defining the UserName
+//        TextField UserName = new TextField();
+//        UserName.setPromptText("Name: ");
+//        UserName.getText();
+//        UserName.setPrefColumnCount(10);
+//
+//        group.getChildren().add(UserName);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//        stage.setScene(scene);
+//        stage.show();
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//    }
 
 
 }
