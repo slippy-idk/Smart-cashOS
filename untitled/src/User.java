@@ -132,8 +132,6 @@ public class User implements Serializable {
 
 
     public void employee_Start(User User, long Start_Shift){
-
-
         System.out.println("What would you like to do");
         System.out.println("1: Start Sale");
         System.out.println("END: end your shift on console");
@@ -152,6 +150,7 @@ public class User implements Serializable {
                     System.out.println("What is the Amount of Money Paid");
                     System.out.println("Enter 0 to END sales");
                     double Payment = Main.User_Input.nextDouble();
+                    Main.User_Input.nextLine();
 
                     if(Payment == 0){
                         employee_Start(User, Start_Shift);
@@ -162,13 +161,8 @@ public class User implements Serializable {
 
                 }while (true);
 
-
-default:
-    System.out.println("You entered the Wrong character try again");
-    employee_Start(User, Start_Shift);
-
-
-
+            default:
+                employee_Start(User, Start_Shift);
         }
 
     }
