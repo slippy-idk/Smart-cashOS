@@ -162,6 +162,7 @@ public class User implements Serializable {
                 }while (true);
 
             default:
+                System.out.println("You entered the wrong character try again");
                 employee_Start(User, Start_Shift);
         }
 
