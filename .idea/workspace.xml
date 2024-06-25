@@ -6,15 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="4fa400b8-b0fa-4f06-85e3-7b465e76f53a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cash/sample/HelloApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cash/sample/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cash/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cash/sample/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/cash/sample/Sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cash/sample/Sample.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cash/sample/hello-view.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="FxmlFile" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -177,7 +183,9 @@
       <updated>1718918380331</updated>
       <workItem from="1718918381391" duration="629000" />
       <workItem from="1718924911975" duration="2094000" />
-      <workItem from="1719070794964" duration="1567000" />
+      <workItem from="1719070794964" duration="2812000" />
+      <workItem from="1719275436639" duration="2168000" />
+      <workItem from="1719337598488" duration="1929000" />
     </task>
     <servers />
   </component>
