@@ -7,8 +7,8 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cash.sample.Controls">
    <children>
       <Text layoutX="255.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to staff" />
-      <TextField layoutX="226.0" layoutY="164.0" />
+      <TextField id="User_Name" fx:id="User_Name" layoutX="226.0" layoutY="164.0" onAction="#Login" promptText="Name" />
       <Text layoutX="233.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter your Name" wrappingWidth="140.310546875" />
-      <Button layoutX="274.0" layoutY="223.0" mnemonicParsing="false" text="Login" onAction="#Login" />
+      <Button layoutX="274.0" layoutY="223.0" mnemonicParsing="false" onAction="#Login" text="Login" />
    </children>
 </AnchorPane>

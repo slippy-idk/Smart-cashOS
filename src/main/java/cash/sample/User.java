@@ -100,35 +100,6 @@ public class User implements Serializable {
     }
 
     public static void Login() { //why is this given me an error when is in use tbd
-//        System.out.println("Please enter your name");
-//        String name = Main.User_Input.nextLine();
-//
-//
-//        try (FileInputStream fileInputStream = new FileInputStream("Users.txt")) {
-//
-//
-//            do {
-//                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-//
-//                User Temp_User = (User) objectInputStream.readObject();
-//                if (Temp_User.Name.equals(name.toLowerCase())) {
-//                    long Start_Shift = System.currentTimeMillis();
-//                    Temp_User.employee_Start(Temp_User, Start_Shift);
-//                }
-//            } while (true);
-//
-//        } catch (IOException e) {
-//            System.out.println("The account was not found");
-//            Main.Menu(); //returns cash.sample.User On error
-//            throw new RuntimeException(e);
-//        } catch (ClassNotFoundException e) {
-//            System.out.println("cash.sample.User Error 3: Class not found"); //if this fails than that means a Non cash.sample.User class has been found and selected
-//            Main.Menu(); //returns cash.sample.User On error
-//            throw new RuntimeException(e);
-//
-//        }
-
-
         Stage stage = new Stage();
 
 
@@ -148,6 +119,38 @@ public class User implements Serializable {
 
     }
 
+
+
+    public static void login_Check(String name){
+
+
+
+
+        try (FileInputStream fileInputStream = new FileInputStream("Users.txt")) {
+
+
+            do {
+                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+                User Temp_User = (User) objectInputStream.readObject();
+                if (Temp_User.Name.equals(name.toLowerCase())) {
+                    long Start_Shift = System.currentTimeMillis();
+                    Temp_User.employee_Start(Temp_User, Start_Shift);
+                }
+            } while (true);
+
+        } catch (IOException e) {
+            System.out.println("The account was not found");
+            Main.Menu(); //returns cash.sample.User On error
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            System.out.println("cash.sample.User Error 3: Class not found"); //if this fails than that means a Non cash.sample.User class has been found and selected
+            Main.Menu(); //returns cash.sample.User On error
+            throw new RuntimeException(e);
+
+        }
+
+    }
 
     public void employee_Start(User User, long Start_Shift) {
 
