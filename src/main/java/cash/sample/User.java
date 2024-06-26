@@ -134,14 +134,14 @@ public class User implements Serializable {
 
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Staff.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Staff_Login.fxml"));
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load(), 620, 640);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        stage.setTitle("Hello!");
+        stage.setTitle("Staff Login");
         stage.setScene(scene);
         stage.show();
 
@@ -219,7 +219,7 @@ public class User implements Serializable {
 
     public void start(Stage stage) throws IOException{
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Staff.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Staff_Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 620, 640);
         stage.setTitle("Hello!");
         stage.setScene(scene);
