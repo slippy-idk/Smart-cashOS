@@ -1,17 +1,11 @@
 package cash.sample;
 
-import javafx.event.EventHandler;
-import javafx.scene.Group;
+
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Line;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.application.Application;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+
 
 
 import java.io.IOException;
@@ -23,7 +17,7 @@ import java.util.Scanner;
  *
  * */
 
-public class Main extends Application {
+public  class Main extends Application {
 
 
 
@@ -54,7 +48,8 @@ public class Main extends Application {
 
         switch (input){
             case "1":
-                //       User.Login();
+
+                cash.sample.User.Login();
 
 
 
@@ -80,10 +75,10 @@ public class Main extends Application {
 
         switch (input){
             case "1":
-//                User.Create_Account();
+                cash.sample.User.Create_Account();
 
             case "2":
-//                User.View_Account();
+                cash.sample.User.View_Account();
 
             case "3":
                 Menu();
@@ -96,15 +91,16 @@ public class Main extends Application {
     }
 
 
-    public void start(Stage stage) throws IOException { //this is the start of the gui and login menu
+    public  void start(Stage stage) throws IOException { //this is the start of the gui and login menu
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Sample.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 620, 640);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
-
-
     }
+
+
+
 
 
 

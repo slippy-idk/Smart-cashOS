@@ -249,14 +249,14 @@ Chinese/Japanese Word Break Dictionary Data (cjdict.txt)
  #  originate from ICOT Free Software.  The following conditions for ICOT
  #  Free Software applies to the current dictionary as well.
  #
- #  Each User may also freely distribute the Program, whether in its
+ #  Each cash.sample.User may also freely distribute the Program, whether in its
  #  original form or modified, to any third party or parties, PROVIDED
  #  that the provisions of Section 3 ("NO WARRANTY") will ALWAYS appear
  #  on, or be attached to, the Program, which is distributed substantially
  #  in the same form as set out herein and that such intended
  #  distribution, if actually made, will neither violate or otherwise
  #  contravene any of the laws and regulations of the countries having
- #  jurisdiction over the User or the intended distribution itself.
+ #  jurisdiction over the cash.sample.User or the intended distribution itself.
  #
  #  NO WARRANTY
  #
