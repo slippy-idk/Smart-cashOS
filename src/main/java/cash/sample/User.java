@@ -87,7 +87,7 @@ public User Current_User;
                 User Temp_User = (User) objectInputStream.readObject();
                 if (Temp_User.Name.equals(name.toLowerCase())) {
                     System.out.println(Temp_User);
-                  
+
                 }
             } while (true);
 
