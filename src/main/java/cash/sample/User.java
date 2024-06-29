@@ -64,11 +64,11 @@ public User Current_User;
             System.out.println("Successfully Created New Employee Account");
         } catch (IOException e) {
             System.out.println("cash.sample.User Error 1: failed to save cash.sample.User IO or Runtime error Occurred");
-            Main.Administrator();//returns user on Error
-            throw new RuntimeException(e);
+
         }
 
-        Main.Administrator();//returns cash.sample.User without risk of triggering Other Functions
+
+
     }
 
 
@@ -87,18 +87,17 @@ public User Current_User;
                 User Temp_User = (User) objectInputStream.readObject();
                 if (Temp_User.Name.equals(name.toLowerCase())) {
                     System.out.println(Temp_User);
-                    Main.Administrator();
+                  
                 }
             } while (true);
 
         } catch (IOException e) {
             System.out.println("The account was not found");
             Main.Administrator(); //returns cash.sample.User On error
-            throw new RuntimeException(e);
+
         } catch (ClassNotFoundException e) {
             System.out.println("cash.sample.User Error 3: Class not found"); //if this fails than that means a Non cash.sample.User class has been found and selected
-            Main.Administrator(); //returns cash.sample.User On error
-            throw new RuntimeException(e);
+
 
         }
 

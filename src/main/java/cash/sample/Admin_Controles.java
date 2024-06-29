@@ -33,8 +33,15 @@ private TextField Enter_Name;
     }
 
 
-    public void Submit_create(ActionEvent e){
+    public void Submit_create(ActionEvent w) throws IOException {
         User.Create_Account(Enter_Name.getText());
+
+
+        Stage stage = (Stage) ((Node) w.getSource()).getScene().getWindow();
+        stage.close();
+
+
+        Back2Menu();
     }
 
     public void View_Account(ActionEvent e) throws IOException {
@@ -48,8 +55,15 @@ private TextField Enter_Name;
     }
 
 
-    public void submit_View(ActionEvent e){
+    public void Submit_View(ActionEvent w) throws IOException {
         User.View_Account(Enter_Name.getText());
+
+
+        Stage stage = (Stage) ((Node) w.getSource()).getScene().getWindow();
+        stage.close();
+
+
+        Back2Menu();
     }
 
     public void Backout(ActionEvent e) throws IOException {
@@ -68,8 +82,20 @@ private TextField Enter_Name;
     }
 
 
-    public void backtoAdmin(ActionEvent e){
+    public void Back2Menu() throws IOException {
+
+        Stage stage = new Stage();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_Menu.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
+        stage.show();
+
 
     }
+
+
+
 
 }

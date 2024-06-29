@@ -10,6 +10,6 @@
    <children>
       <Text layoutX="206.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Insert The Account Name" />
       <TextField fx:id="Enter_Name" layoutX="226.0" layoutY="157.0" promptText="Accont Name" />
-      <Button fx:id="Submit" layoutX="266.0" layoutY="241.0" mnemonicParsing="false" text="Submit" onAction="#" />
+      <Button fx:id="Submit" layoutX="266.0" layoutY="241.0" mnemonicParsing="false" text="Submit" onAction="#Submit_View" />
    </children>
 </AnchorPane>
