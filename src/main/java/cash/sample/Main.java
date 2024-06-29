@@ -75,10 +75,12 @@ public  class Main extends Application {
 
         switch (input){
             case "1":
-                cash.sample.User.Create_Account();
+                input = User_Input.nextLine();
+                cash.sample.User.Create_Account(input);
 
             case "2":
-                cash.sample.User.View_Account();
+                input = User_Input.nextLine();
+                cash.sample.User.View_Account(input);
 
             case "3":
                 Menu();

@@ -1,8 +1,11 @@
 package cash.sample;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -44,14 +47,17 @@ public class User implements Serializable {
     }
 
 
-    public static void Create_Account() { //used to create a user account
+public User Current_User;
+
+
+    public static void Create_Account(String name) { //used to create a user account
         try (FileOutputStream fileOutputStream = new FileOutputStream("Users.txt", true)) {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
 
             System.out.println("Please Enter the name of the employee");
-            Main.input = Main.User_Input.nextLine();
-            User Temp_User = new User(Main.input.toLowerCase());
+
+            User Temp_User = new User(name);
 
 
             objectOutputStream.writeObject(Temp_User);
@@ -66,10 +72,10 @@ public class User implements Serializable {
     }
 
 
-    public static void View_Account() {
+    public static void View_Account(String name) {
 
         System.out.println("Please enter the name of the Employee your trying to view");
-        String name = Main.User_Input.nextLine();
+
 
 
         try (FileInputStream fileInputStream = new FileInputStream("Users.txt")) {
@@ -99,7 +105,10 @@ public class User implements Serializable {
 
     }
 
-    public static void Login() { //why is this given me an error when is in use tbd
+
+
+
+    public static void Login() { //load the login screen
         Stage stage = new Stage();
 
 
@@ -116,82 +125,51 @@ public class User implements Serializable {
         stage.setScene(scene);
         stage.show();
 
+        //the actuall login and checker for account is in the controller class for the sake of keeping current track of the User account
+
 
     }
 
 
 
-    public static void login_Check(String name){
 
 
 
 
-        try (FileInputStream fileInputStream = new FileInputStream("Users.txt")) {
 
 
-            do {
-                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
-                User Temp_User = (User) objectInputStream.readObject();
-                if (Temp_User.Name.equals(name.toLowerCase())) {
-                    long Start_Shift = System.currentTimeMillis();
-                    Temp_User.employee_Start(Temp_User, Start_Shift);
-                }
-            } while (true);
+    public  void employe_Start(User user) throws IOException { //this is the start of the gui and login menu
 
-        } catch (IOException e) {
-            System.out.println("The account was not found");
-            Main.Menu(); //returns cash.sample.User On error
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            System.out.println("cash.sample.User Error 3: Class not found"); //if this fails than that means a Non cash.sample.User class has been found and selected
-            Main.Menu(); //returns cash.sample.User On error
-            throw new RuntimeException(e);
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Staff_Menu.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+        stage.setTitle("Hello");
+        stage.setScene(scene);
+        stage.show();
 
-        }
+
+
+
 
     }
 
-    public void employee_Start(User User, long Start_Shift) {
 
 
-        System.out.println("What would you like to do");
-        System.out.println("1: Start Sale");
-        System.out.println("END: end your shift on console");
+public static void Start_Sales() throws IOException {
 
-        Main.input = Main.User_Input.nextLine();
+    Stage stage = new Stage();
+    FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Sales.fxml"));
+    Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+    stage.setTitle("Hello");
+    stage.setScene(scene);
+    stage.show();
 
-
-        switch (Main.input.toLowerCase()) {
-            case "end":
-                End_shift(User, Start_Shift);
-
-
-            case "1":
-                do {
-                    System.out.println(" "); // used to space out for readability
-                    System.out.println("What is the Amount of Money Paid");
-                    System.out.println("Enter 0 to END sales");
-                    double Payment = Main.User_Input.nextDouble();
-
-                    if (Payment == 0) {
-                        employee_Start(User, Start_Shift);
-                    }
-
-                    User.setGrossEarning(User.getGrossEarning() + Payment);
+}
 
 
-                } while (true);
 
 
-            default:
-                System.out.println("You entered the Wrong character try again");
-                employee_Start(User, Start_Shift);
-
-
-        }
-
-    }
 
 
     public void End_shift(User User, long Start_Shift) {
@@ -200,9 +178,8 @@ public class User implements Serializable {
 
         End_Shift = End_Shift - Start_Shift;
 
-        long Hours = End_Shift / 1000;
-        Hours = Hours / 60;
-        Hours = Hours / 60;
+        long Hours = End_Shift / 3600000;
+
 
         User.setHoursWorked(Hours);
 
