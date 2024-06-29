@@ -22,7 +22,7 @@ private TextField Enter_Name;
 
         Stage stage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AdminNameInsert.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_NameInsert.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 620, 640);
         stage.setTitle("Hello!");
         stage.setScene(scene);
@@ -40,7 +40,7 @@ private TextField Enter_Name;
     public void View_Account(ActionEvent e) throws IOException {
         Stage stage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AdminNameInsert2.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_NameInsert2.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 620, 640);
         stage.setTitle("Hello!");
         stage.setScene(scene);
