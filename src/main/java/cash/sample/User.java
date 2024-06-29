@@ -47,7 +47,7 @@ public class User implements Serializable {
     }
 
 
-public User Current_User;
+
 
 
     public static void Create_Account(String name) { //used to create a user account
@@ -177,8 +177,9 @@ public static void Start_Sales() throws IOException {
 
         End_Shift = End_Shift - Start_Shift;
 
-        long Hours = End_Shift / 3600000;
-
+        long Hours = End_Shift/1000;
+        Hours = Hours/60;
+        Hours = Hours/60;
 
         User.setHoursWorked(Hours);
 
@@ -190,7 +191,7 @@ public static void Start_Sales() throws IOException {
 
 
         System.out.println(" "); // used to space menu and the end shift screen
-        Main.Menu();//returns the cash.sample.User to the Menu to not trigger an Io error
+        Main.Menu();//returns the User to the Menu to not trigger an Io error
 
 
     }
