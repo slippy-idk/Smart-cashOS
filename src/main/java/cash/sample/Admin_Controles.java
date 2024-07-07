@@ -20,13 +20,13 @@ private TextField Enter_Name;
     public void Create_Account(ActionEvent e) throws IOException {
 
 
-        Stage stage = new Stage();
+        Stage Stage_Account_Creation = new Stage();
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_NameInsert.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 620, 640);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
+        Stage_Account_Creation.setTitle("Account Creation!");
+        Stage_Account_Creation.setScene(scene);
+        Stage_Account_Creation.show();
 
 
 
@@ -45,13 +45,13 @@ private TextField Enter_Name;
     }
 
     public void View_Account(ActionEvent e) throws IOException {
-        Stage stage = new Stage();
+        Stage Stage_Admin_Login = new Stage();
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_NameInsert2.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 620, 640);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
+        Stage_Admin_Login.setTitle("Hello!");
+        Stage_Admin_Login.setScene(scene);
+        Stage_Admin_Login.show();
     }
 
 
@@ -66,7 +66,7 @@ private TextField Enter_Name;
         Back2Menu();
     }
 
-    public void Backout(ActionEvent e) throws IOException {
+    public void Backout(ActionEvent e) throws IOException { // this loads back to the login screen
         Main main = new Main();
 
 
@@ -76,21 +76,21 @@ private TextField Enter_Name;
 
 
 
-        Stage stage1 = new Stage();
+        Stage Main_Menu = new Stage();
 
-        main.start(stage1);
+        main.start(Main_Menu);
     }
 
 
     public void Back2Menu() throws IOException {
 
-        Stage stage = new Stage();
+        Stage Stage_Admin_Menu = new Stage();
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_Menu.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 620, 640);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
+        Stage_Admin_Menu.setTitle("Admin Menu");
+        Stage_Admin_Menu.setScene(scene);
+        Stage_Admin_Menu.show();
 
 
     }

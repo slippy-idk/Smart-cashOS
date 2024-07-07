@@ -93,12 +93,12 @@ public  class Main extends Application {
     }
 
 
-    public  void start(Stage stage) throws IOException { //this is the start of the gui and login menu
+    public  void start(Stage Main_Menu) throws IOException { //this is the start of the gui and login menu
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Sample.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 620, 640);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
+        Main_Menu.setTitle("Main Menu");
+        Main_Menu.setScene(scene);
+        Main_Menu.show();
     }
 
 

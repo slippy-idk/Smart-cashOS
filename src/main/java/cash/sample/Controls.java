@@ -38,7 +38,7 @@ public long Start_Shift;
     }
 
     public void Admin(ActionEvent e){
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Stage Admin_Menu = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
         FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Admin_Menu.fxml"));
         Scene scene = null;
@@ -47,9 +47,9 @@ public long Start_Shift;
         } catch (IOException w) {
             throw new RuntimeException(w);
         }
-        stage.setTitle("Admin Menu");
-        stage.setScene(scene);
-        stage.show();
+        Admin_Menu.setTitle("Admin Menu");
+        Admin_Menu.setScene(scene);
+        Admin_Menu.show();
 
     }
 
@@ -58,10 +58,10 @@ public long Start_Shift;
 private TextField User_Name;
     public void Login(ActionEvent w){
 
-        Stage stage = (Stage) ((Node) w.getSource()).getScene().getWindow();
+        Stage User_Login = (Stage) ((Node) w.getSource()).getScene().getWindow();
 
         try (FileInputStream fileInputStream = new FileInputStream("Users.txt")) {
-            stage.close();
+            User_Login.close();
 
 
             do {
@@ -104,7 +104,7 @@ private TextField User_Name;
 @FXML
 private TextField Sale_Value;
     public void Submit_Sales(ActionEvent w){
-        Stage stage = (Stage) ((Node) w.getSource()).getScene().getWindow();
+        Stage Sales = (Stage) ((Node) w.getSource()).getScene().getWindow(); //might not be needed tbd
 
 
         double Sale = Double.parseDouble(Sale_Value.getText());

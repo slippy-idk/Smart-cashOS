@@ -1,11 +1,8 @@
 package cash.sample;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -108,21 +105,21 @@ public class User implements Serializable {
 
 
     public static void Login() { //load the login screen
-        Stage stage = new Stage();
+        Stage Login = new Stage();
 
 
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Staff_Login.fxml"));
-        Scene scene = null;
+        Scene scene;
         try {
             scene = new Scene(fxmlLoader.load(), 620, 640);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        stage.setTitle("Staff Login");
-        stage.setScene(scene);
-        stage.show();
+        Login.setTitle("Staff Login");
+        Login.setScene(scene);
+        Login.show();
 
         //the actuall login and checker for account is in the controller class for the sake of keeping current track of the User account
 
@@ -140,12 +137,12 @@ public class User implements Serializable {
 
     public  void employe_Start(User user) throws IOException { //this is the start of the gui and login menu
 
-        Stage stage = new Stage();
+        Stage Staff_Menu = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Staff_Menu.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 620, 640);
-        stage.setTitle("Hello");
-        stage.setScene(scene);
-        stage.show();
+        Staff_Menu.setTitle("Hello");
+        Staff_Menu.setScene(scene);
+        Staff_Menu.show();
 
 
 
@@ -157,12 +154,12 @@ public class User implements Serializable {
 
 public static void Start_Sales() throws IOException {
 
-    Stage stage = new Stage();
+    Stage Sales_Tracker = new Stage();
     FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Sales.fxml"));
     Scene scene = new Scene(fxmlLoader.load(), 620, 640);
-    stage.setTitle("Hello");
-    stage.setScene(scene);
-    stage.show();
+    Sales_Tracker.setTitle("Hello");
+    Sales_Tracker.setScene(scene);
+    Sales_Tracker.show();
 
 }
 
@@ -197,17 +194,17 @@ public static void Start_Sales() throws IOException {
     }
 
 
-    public void start(Stage stage) throws IOException{
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Staff_Login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
-
-    }
+//    public void start(Stage Login) throws IOException{
+//
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Staff_Login.fxml"));
+//        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+//        Login.setTitle("login");
+//        Login.setScene(scene);
+//        Login.show();
+//
+//    }
 
     public static void close(Stage stage){
         stage.close();
-    }
+    } // might be used for later
 }
