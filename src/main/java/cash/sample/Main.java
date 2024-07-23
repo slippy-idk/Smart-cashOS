@@ -5,7 +5,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import java.sql.Connection;
+
+import java.sql.*;
 
 
 import java.io.IOException;
@@ -26,7 +27,12 @@ public  class Main extends Application {
     //these two global variables are designed for user input
 
     public static void main(String[] args) {
-        launch(args);
+//        launch(args);
+
+
+        Main main = new Main();
+
+        main.test();
 
 
 
@@ -59,6 +65,7 @@ public  class Main extends Application {
             default:
                 System.out.println("You entered A wrong input try again");
                 Menu();
+
         }
 
     }
@@ -99,6 +106,31 @@ public  class Main extends Application {
         Main_Menu.setTitle("Main Menu");
         Main_Menu.setScene(scene);
         Main_Menu.show();
+    }
+
+    public void test(){
+
+        try{
+
+
+        Connection connection = DriverManager.getConnection(
+                "jdbc:mysql://127.0.0.1:3306/test",
+                "root",
+                "1234"
+        );
+
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM USER");
+
+        while(resultSet.next()){
+            System.out.println(resultSet.getString("idUser"));
+            System.out.println(resultSet.getString("Name"));
+        };
+    }catch (SQLException e){
+            System.out.println("Error");
+        }
+
+
     }
 
 
