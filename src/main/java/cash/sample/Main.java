@@ -119,13 +119,13 @@ public  class Main extends Application {
                 "1234"
         );
 
+        String name = "Adam";
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM USER");
+        String insert = "INSERT INTO USER  (Name)"+
+                "VALUES ('Adam')";
+        statement.execute(insert);
+        statement.close();
 
-        while(resultSet.next()){
-            System.out.println(resultSet.getString("idUser"));
-            System.out.println(resultSet.getString("Name"));
-        };
     }catch (SQLException e){
             System.out.println("Error");
         }
