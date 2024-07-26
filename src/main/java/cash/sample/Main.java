@@ -27,12 +27,12 @@ public  class Main extends Application {
     //these two global variables are designed for user input
 
     public static void main(String[] args) {
-//        launch(args);
+        launch(args);
 
-
-        Main main = new Main();
-
-        main.test();
+//
+//        Main main = new Main();
+//
+//        main.test();
 
 
 
