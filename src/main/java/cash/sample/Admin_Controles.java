@@ -8,13 +8,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+
 import java.io.IOException;
+import java.sql.*;
 
 public class Admin_Controles {
 
-@FXML
-private TextField Enter_Name;
-
+    @FXML
+    private TextField Enter_Name;
 
 
     public void Create_Account(ActionEvent e) throws IOException {
@@ -30,18 +31,48 @@ private TextField Enter_Name;
 
 
 
+
+
+
+
+
+
     }
 
 
     public void Submit_create(ActionEvent w) throws IOException {
-        User.Create_Account(Enter_Name.getText());
+//        User.Create_Account(Enter_Name.getText());
+
+        try{
 
 
-        Stage stage = (Stage) ((Node) w.getSource()).getScene().getWindow();
-        stage.close();
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:mysql://127.0.0.1:3306/test",
+                    "root",
+                    "1234"
+            );
+
+            String name = Enter_Name.getText();
+
+            String insert = "INSERT INTO USER  (Name)"+
+                    "VALUES (?)";
 
 
-        Back2Menu();
+            PreparedStatement preparedStatement= connection.prepareStatement(insert);
+            preparedStatement.setString(1, name);
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+            Back2Menu();
+
+
+
+        }catch (SQLException e){
+            System.out.println("Error");
+        }
+
+
     }
 
     public void View_Account(ActionEvent e) throws IOException {
@@ -56,14 +87,59 @@ private TextField Enter_Name;
 
 
     public void Submit_View(ActionEvent w) throws IOException {
-        User.View_Account(Enter_Name.getText());
+//        User.View_Account(Enter_Name.getText());
+//
+//
+//        Stage stage = (Stage) ((Node) w.getSource()).getScene().getWindow();
+//        stage.close();
+//
+//
+//        Back2Menu();
 
 
-        Stage stage = (Stage) ((Node) w.getSource()).getScene().getWindow();
-        stage.close();
+        String data_Name;
+        String name = Enter_Name.getText();
+
+        try {
+
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:mysql://127.0.0.1:3306/test",
+                    "root",
+                    "1234"
+            );
 
 
-        Back2Menu();
+            Stage User_Login = (Stage) ((Node) w.getSource()).getScene().getWindow();
+
+
+            String sql = "SELECT * FROM user";
+            Statement statement = connection.prepareStatement(sql);
+
+            ResultSet resultSet = statement.executeQuery(sql);
+
+
+
+            while (resultSet.next()){
+                data_Name = resultSet.getString("Name");
+
+                if(name.equals(data_Name)){
+                    //tbd add in view account screen
+
+
+                    break;
+
+
+
+                }else {
+                    System.out.println("Account not found");
+                    Main.Menu();
+                }
+
+            }
+
+    } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void Backout(ActionEvent e) throws IOException { // this loads back to the login screen
