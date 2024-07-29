@@ -18,7 +18,7 @@ public class Admin_Controles {
     private TextField Enter_Name;
 
 
-    public void Create_Account(ActionEvent e) throws IOException {
+    public void Create_Account() throws IOException {
 
 
         Stage Stage_Account_Creation = new Stage();
@@ -40,13 +40,13 @@ public class Admin_Controles {
     }
 
 
-    public void Submit_create(ActionEvent w) throws IOException {
+    public void Submit_create() throws IOException { //creates new account
 //        User.Create_Account(Enter_Name.getText());
 
         try{
 
 
-            Connection connection = DriverManager.getConnection(
+            Connection connection = DriverManager.getConnection( //creates connection with the sql databse
                     "jdbc:mysql://127.0.0.1:3306/test",
                     "root",
                     "1234"
@@ -75,7 +75,7 @@ public class Admin_Controles {
 
     }
 
-    public void View_Account(ActionEvent e) throws IOException {
+    public void View_Account() throws IOException {
         Stage Stage_Admin_Login = new Stage();
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_NameInsert2.fxml"));
@@ -86,15 +86,8 @@ public class Admin_Controles {
     }
 
 
-    public void Submit_View(ActionEvent w) throws IOException {
-//        User.View_Account(Enter_Name.getText());
-//
-//
-//        Stage stage = (Stage) ((Node) w.getSource()).getScene().getWindow();
-//        stage.close();
-//
-//
-//        Back2Menu();
+    public void Submit_View(ActionEvent w) { //submits the user request to view
+
 
 
         String data_Name;
@@ -132,7 +125,9 @@ public class Admin_Controles {
 
                 }else {
                     System.out.println("Account not found");
-                    Main.Menu();
+
+
+                    //tbd put in account
                 }
 
             }
@@ -146,7 +141,7 @@ public class Admin_Controles {
         Main main = new Main();
 
 
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow(); //gets the current window to back out
 
         stage.close();
 
@@ -158,7 +153,7 @@ public class Admin_Controles {
     }
 
 
-    public void Back2Menu() throws IOException {
+    public void Back2Menu() throws IOException { //returns the user back to menu
 
         Stage Stage_Admin_Menu = new Stage();
 

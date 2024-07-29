@@ -19,8 +19,8 @@ public class Controls {
 
 
 
-public User Current_User = new User("");
-public long Start_Shift;
+public User Current_User = new User(""); //this is used to track the current users account
+public long Start_Shift; //gets the user current starting time as of shift for u8se
 
     
 
@@ -59,52 +59,19 @@ public long Start_Shift;
 private TextField User_Name;
     public void Login(ActionEvent w){
 
-//        Stage User_Login = (Stage) ((Node) w.getSource()).getScene().getWindow();
-//
-//        try (FileInputStream fileInputStream = new FileInputStream("Users.txt")) {
-//            User_Login.close();
-//
-//
-//            do {
-//                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-//
-//                Current_User = (User) objectInputStream.readObject();
-//                if (Current_User.getName().equals(Current_User.getName().toLowerCase())) {
-//                     Start_Shift = System.currentTimeMillis();
-//                     System.out.println(Current_User.getName());
-//
-//                   Current_User.employe_Start(Current_User);
-//                    break;
-//                }
-//            } while (true);
-//
-//        } catch (IOException e) {
-//            System.out.println("The account was not found");
-//            Main.Menu();
-//
-//        } catch (ClassNotFoundException e) {
-//            System.out.println("cash.sample.User Error 3: Class not found"); //if this fails than that means a Non cash.sample.User class has been found and selected
-//            Main.Menu(); //returns cash.sample.User On error
-//            throw new RuntimeException(e);
-//
-//        }
-
-
-
-
-        String data_Name;
-        String name = User_Name.getText();
+        String data_Name; //for checking the current database name with the user entered
+        String name = User_Name.getText(); // takes the name the user entered
 
         try {
 
-            Connection connection = DriverManager.getConnection(
+            Connection connection = DriverManager.getConnection( //creates connection with the sql databse
                     "jdbc:mysql://127.0.0.1:3306/test",
                     "root",
                     "1234"
             );
 
 
-            Stage User_Login = (Stage) ((Node) w.getSource()).getScene().getWindow();
+//            Stage User_Login = (Stage) ((Node) w.getSource()).getScene().getWindow();
 
 
             String sql = "SELECT * FROM user";
@@ -128,7 +95,7 @@ private TextField User_Name;
 
                 }else {
                     System.out.println("Account not found");
-                    Main.Menu();
+                    // tbd put in account meny
                 }
 
             }
@@ -148,7 +115,7 @@ private TextField User_Name;
 
     public void Start_Sales(ActionEvent e) throws IOException {
 
-        User.Start_Sales();
+        User.Start_Sales(); //load the start sales for the user
 
 
 
@@ -157,7 +124,7 @@ private TextField User_Name;
 
 @FXML
 private TextField Sale_Value;
-    public void Submit_Sales(ActionEvent w){
+    public void Submit_Sales(ActionEvent w){ //this is used when a user sumbits a sale in here to make it repitible
         Stage Sales = (Stage) ((Node) w.getSource()).getScene().getWindow(); //might not be needed tbd
 
 
@@ -179,6 +146,8 @@ private TextField Sale_Value;
 
         Current_User.employe_Start(Current_User);
 
+        //throws the user back to employee menu
+
 
     }
 
@@ -186,6 +155,8 @@ private TextField Sale_Value;
     public void Logout(ActionEvent e){
 
         Current_User.End_shift(Current_User, Start_Shift);
+
+        //shows the user the end of shift
 
     }
 }
