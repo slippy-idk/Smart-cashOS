@@ -46,26 +46,6 @@ public class User implements Serializable {
     }
 
 
-//    public static void Create_Account(String name) { //used to create a user account
-//        try (FileOutputStream fileOutputStream = new FileOutputStream("Users.txt", true)) {
-//            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-//
-//
-//            System.out.println("Please Enter the name of the employee");
-//
-//            User Temp_User = new User(name);
-//
-//
-//            objectOutputStream.writeObject(Temp_User);
-//            System.out.println("Successfully Created New Employee Account");
-//        } catch (IOException e) {
-//            System.out.println("cash.sample.User Error 1: failed to save cash.sample.User IO or Runtime error Occurred");
-//
-//        }
-//
-//
-//
-//    }
 
 
 //    public static void View_Account(String name) {
@@ -176,16 +156,4 @@ public class User implements Serializable {
 
 
     }
-//
-//    public void start(Stage Login) throws IOException{
-//
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Staff_Login.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
-//        Login.setTitle("login");
-//        Login.setScene(scene);
-//        Login.show();
-//
-//    }
-
-
 }
