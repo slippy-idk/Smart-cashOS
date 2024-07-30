@@ -57,10 +57,15 @@ public long Start_Shift; //gets the user current starting time as of shift for u
 
 @FXML
 private TextField User_Name;
+
+    @FXML
+    private TextField Password;
     public void Login(ActionEvent w){
 
         String data_Name; //for checking the current database name with the user entered
         String name = User_Name.getText(); // takes the name the user entered
+        String password = Password.getText();
+        String data_Pass;
 
         try {
 
@@ -80,25 +85,32 @@ private TextField User_Name;
             ResultSet resultSet = statement.executeQuery(sql);
 
 
+            //tbd rework this for the love of god
+            boolean accountFound = false;
+
+
 
             while (resultSet.next()){
-                data_Name = resultSet.getString("Name");
+                data_Name = resultSet.getString("name");
+                data_Pass = resultSet.getString("password");
 
-                if(name.equals(data_Name)){
+                if(name.equals(data_Name.toLowerCase()) && password.equals(data_Pass.toLowerCase())){
                     Start_Shift = System.currentTimeMillis();
                      System.out.println(Current_User.getName());
 
                    Current_User.employe_Start(Current_User);
-                    break;
+
+                   accountFound = true;
 
 
 
-                }else {
-                    System.out.println("Account not found");
-                    // tbd put in account meny
                 }
-
+            }if (!accountFound) {
+                System.out.println("Account not found");
+                // tbd put in account menu
             }
+
+
 
 
 

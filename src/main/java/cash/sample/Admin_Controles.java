@@ -14,8 +14,7 @@ import java.sql.*;
 
 public class Admin_Controles {
 
-    @FXML
-    private TextField Enter_Name;
+
 
 
     public void Create_Account(ActionEvent w ) throws IOException {
@@ -44,8 +43,15 @@ public class Admin_Controles {
 
     }
 
+//the below get a text field to get user input from the GUI
+    @FXML
+    private TextField Enter_Name;
 
-    public void Submit_create() throws IOException { //creates new account
+    @FXML
+    private TextField Password;
+
+
+    public void Submit_create(ActionEvent w) throws IOException { //creates new account
 //        User.Create_Account(Enter_Name.getText());
 
         try{
@@ -58,16 +64,24 @@ public class Admin_Controles {
             );
 
             String name = Enter_Name.getText();
+            String password = Password.getText();
 
-            String insert = "INSERT INTO USER  (Name)"+
-                    "VALUES (?)";
+            String insert = "INSERT INTO USER  (name, password)"+
+                    "VALUES (?, ?)";
 
 
             PreparedStatement preparedStatement= connection.prepareStatement(insert);
-            preparedStatement.setString(1, name);
+            preparedStatement.setString(1, name.toLowerCase());
+            preparedStatement.setString(2, password.toLowerCase());
+
+
+            //tbd enter code for cheching password
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
+
+            Stage Current = (Stage) ((Node) w.getSource()).getScene().getWindow();
+            Current.close();
 
             Back2Menu();
 
