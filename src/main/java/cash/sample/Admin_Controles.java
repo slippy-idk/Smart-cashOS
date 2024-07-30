@@ -21,9 +21,9 @@ public class Admin_Controles {
     public void Create_Account(ActionEvent w ) throws IOException {
 
 
-        Stage Current = (Stage) ((Node) w.getSource()).getScene().getWindow();
+        Stage Current = (Stage) ((Node) w.getSource()).getScene().getWindow(); //for getting the main menu stage
 
-        Current.close();
+        Current.close(); //closes the main menu stage
 
 
         Stage Stage_Account_Creation = new Stage();
