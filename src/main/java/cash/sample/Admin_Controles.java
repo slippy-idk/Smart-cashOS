@@ -18,7 +18,12 @@ public class Admin_Controles {
     private TextField Enter_Name;
 
 
-    public void Create_Account() throws IOException {
+    public void Create_Account(ActionEvent w ) throws IOException {
+
+
+        Stage Current = (Stage) ((Node) w.getSource()).getScene().getWindow();
+
+        Current.close();
 
 
         Stage Stage_Account_Creation = new Stage();
