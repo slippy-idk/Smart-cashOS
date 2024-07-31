@@ -158,6 +158,8 @@ private TextField Sale_Value;
 
         Current_User.employe_Start(Current_User);
 
+        //tbd put user end screen
+
         //throws the user back to employee menu
 
 

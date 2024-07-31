@@ -6,7 +6,6 @@ import javafx.stage.Stage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
-import java.util.Scanner;
 /**
  * @author Lewis Perry Nickname = Slippy
  *
@@ -18,9 +17,8 @@ public  class Main extends Application {
 
 
 
-    static Scanner User_Input = new Scanner(System.in);
-    static String input;
-    //these two global variables are designed for user input
+
+
 
     public static void main(String[] args) {
 
