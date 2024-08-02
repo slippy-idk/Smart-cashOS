@@ -76,7 +76,7 @@ private TextField User_Name;
             );
 
 
-//            Stage User_Login = (Stage) ((Node) w.getSource()).getScene().getWindow();
+            Stage User_Login = (Stage) ((Node) w.getSource()).getScene().getWindow();
 
 
             String sql = "SELECT * FROM user";
@@ -101,6 +101,7 @@ private TextField User_Name;
                    Current_User.employe_Start(Current_User);
 
                    accountFound = true;
+                   User_Login.close();
 
 
 
