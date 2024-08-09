@@ -109,7 +109,7 @@ public class Admin_Controles {
 
 
 
-        String data_Name;
+        User user = new User("");
         String name = Enter_Name.getText();
 
         try {
@@ -132,9 +132,10 @@ public class Admin_Controles {
 
 
             while (resultSet.next()){
-                data_Name = resultSet.getString("Name");
 
-                if(name.equals(data_Name)){
+                user.setName(resultSet.getString("name"));
+
+                if(name.equals(user.getName())){
                     //tbd add in view account screen
 
 
