@@ -130,9 +130,6 @@ private TextField User_Name;
 
         User.Start_Sales(); //load the start sales for the user
 
-
-
-
     }
 
 @FXML
@@ -172,6 +169,27 @@ private TextField Sale_Value;
         Current_User.End_shift(Current_User, Start_Shift);
 
         //shows the user the end of shift
+
+    }
+
+
+    public void Self_View_Submit(ActionEvent e){
+
+        Stage Self_view = new Stage();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Admin_Menu.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 620, 640);
+        } catch (IOException w) {
+            throw new RuntimeException(w);
+        }
+        Self_view.setTitle("Admin Menu");
+        Self_view.setScene(scene);
+        Self_view.show();
+
+
+
 
     }
 }
