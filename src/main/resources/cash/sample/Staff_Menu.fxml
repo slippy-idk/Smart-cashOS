@@ -7,7 +7,8 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cash.sample.Controls">
    <children>
       <Text layoutX="289.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" />
-      <Button fx:id="StartSale" layoutX="252.0" layoutY="143.0" mnemonicParsing="false" onAction="#Start_Sales" prefHeight="48.0" prefWidth="123.0" text="Start Sales" />
-      <Button fx:id="Logout" layoutX="252.0" layoutY="224.0" mnemonicParsing="false" prefHeight="48.0" onAction="#Logout" prefWidth="123.0" text="Logout/End Shift" />
+      <Button fx:id="StartSale" layoutX="252.0" layoutY="94.0" mnemonicParsing="false" onAction="#Start_Sales" prefHeight="48.0" prefWidth="123.0" text="Start Sales" />
+      <Button fx:id="Logout" layoutX="252.0" layoutY="167.0" mnemonicParsing="false" onAction="#Logout" prefHeight="48.0" prefWidth="123.0" text="Logout/End Shift" />
+      <Button fx:id="View_Account" layoutX="252.0" layoutY="257.0" mnemonicParsing="false" onAction="#Self_View_Submit" prefHeight="48.0" prefWidth="123.0" text="View Account" />
    </children>
 </AnchorPane>

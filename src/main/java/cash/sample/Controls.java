@@ -19,8 +19,10 @@ public class Controls {
 
 
 
-public User Current_User = new User(""); //this is used to track the current users account
+public static User Current_User = new User(""); //this is used to track the current users account
 public long Start_Shift; //gets the user current starting time as of shift for u8se
+
+
 
     
 
@@ -35,7 +37,28 @@ public long Start_Shift; //gets the user current starting time as of shift for u
 
 
 
-        User.Login();
+        Login();
+    }
+
+
+    public static void Login() { //load the login screen
+        Stage Login = new Stage();
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Staff_Login.fxml"));
+        Scene scene;
+        try {
+            scene = new Scene(fxmlLoader.load(), 620, 640);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Login.setTitle("Staff Login");
+        Login.setScene(scene);
+        Login.show();
+
+        //the actuall login and checker for account is in the controller class for the sake of keeping current track of the User account
+
+
     }
 
     public void Admin(ActionEvent e){
@@ -96,9 +119,15 @@ private TextField User_Name;
 
                 if(name.equals(data_Name.toLowerCase()) && password.equals(data_Pass.toLowerCase())){
                     Start_Shift = System.currentTimeMillis();
+
+                    
                      System.out.println(Current_User.getName());
 
-                   Current_User.employe_Start(Current_User);
+                     Current_User.setName(data_Name.toLowerCase());
+
+
+
+                   employe_Start(Current_User);
 
                    accountFound = true;
                    User_Login.close();
@@ -128,9 +157,23 @@ private TextField User_Name;
 
     public void Start_Sales(ActionEvent e) throws IOException {
 
-        User.Start_Sales(); //load the start sales for the user
+        Sales(); //load the start sales for the user
 
     }
+
+    public static void Sales() throws IOException { //loads the start of sales screen the sales screen is handled in control tab
+
+        Stage Sales_Tracker = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Sales.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+        Sales_Tracker.setTitle("Hello");
+        Sales_Tracker.setScene(scene);
+        Sales_Tracker.show();
+
+    }
+
+
+
 
 @FXML
 private TextField Sale_Value;
@@ -143,6 +186,7 @@ private TextField Sale_Value;
         Current_User.setGrossEarning(Sale+Current_User.getGrossEarning());
 
         System.out.println(Current_User.getGrossEarning());
+        System.out.println(Current_User.getName());
 
 
 
@@ -154,7 +198,7 @@ private TextField Sale_Value;
 
     public void End_Sales(ActionEvent w) throws IOException {
 
-        Current_User.employe_Start(Current_User);
+       employe_Start(Current_User);
 
         //tbd put user end screen
 
@@ -163,6 +207,17 @@ private TextField Sale_Value;
 
     }
 
+    public void employe_Start(User user) throws IOException { //this is the start of the gui and login menu
+
+        Stage Staff_Menu = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Staff_Menu.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+        Staff_Menu.setTitle("Hello");
+        Staff_Menu.setScene(scene);
+        Staff_Menu.show();
+
+
+    }
 
     public void Logout(ActionEvent e){
 
@@ -175,18 +230,24 @@ private TextField Sale_Value;
 
     public void Self_View_Submit(ActionEvent e){
 
-        Stage Self_view = new Stage();
+//        Stage Self_view = new Stage();
+//
+//        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Self_View account.fxml"));
+//        Scene scene = null;
+//        try {
+//            scene = new Scene(fxmlLoader.load(), 620, 640);
+//        } catch (IOException w) {
+//            throw new RuntimeException(w);
+//        }
+//        Self_view.setTitle("View Account");
+//        Self_view.setScene(scene);
+//        Self_view.show();
+//
+//        System.out.println(Current_User.getName());
 
-        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Admin_Menu.fxml"));
-        Scene scene = null;
-        try {
-            scene = new Scene(fxmlLoader.load(), 620, 640);
-        } catch (IOException w) {
-            throw new RuntimeException(w);
-        }
-        Self_view.setTitle("Admin Menu");
-        Self_view.setScene(scene);
-        Self_view.show();
+        System.out.println(Current_User.getName());
+
+
 
 
 

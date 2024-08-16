@@ -82,48 +82,32 @@ public class User implements Serializable {
 //
 //    }
 
-    public void employe_Start(User user) throws IOException { //this is the start of the gui and login menu
-
-        Stage Staff_Menu = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Staff_Menu.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
-        Staff_Menu.setTitle("Hello");
-        Staff_Menu.setScene(scene);
-        Staff_Menu.show();
 
 
-    }
 
 
-    public static void Login() { //load the login screen
-        Stage Login = new Stage();
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Staff_Login.fxml"));
-        Scene scene;
+
+
+
+    public static void View_Account(User user){
+
+
+        Stage Self_view = new Stage();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Self_View account.fxml"));
+        Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load(), 620, 640);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (IOException w) {
+            throw new RuntimeException(w);
         }
-        Login.setTitle("Staff Login");
-        Login.setScene(scene);
-        Login.show();
-
-        //the actuall login and checker for account is in the controller class for the sake of keeping current track of the User account
+        Self_view.setTitle("View Account");
+        Self_view.setScene(scene);
+        Self_view.show();
 
 
-    }
-
-
-    public static void Start_Sales() throws IOException { //loads the start of sales screen the sales screen is handled in control tab
-
-        Stage Sales_Tracker = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Sales.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
-        Sales_Tracker.setTitle("Hello");
-        Sales_Tracker.setScene(scene);
-        Sales_Tracker.show();
 
     }
 
