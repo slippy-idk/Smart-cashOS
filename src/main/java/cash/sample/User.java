@@ -96,7 +96,7 @@ public class User implements Serializable {
 
         Stage Self_view = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Self_View account.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Self_View_account.fxml"));
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load(), 620, 640);

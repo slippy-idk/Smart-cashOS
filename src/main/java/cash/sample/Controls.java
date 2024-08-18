@@ -6,13 +6,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.net.ConnectException;
 import java.sql.*;
 
 public class Controls {
@@ -21,6 +24,8 @@ public class Controls {
 
 public static User Current_User = new User(""); //this is used to track the current users account
 public long Start_Shift; //gets the user current starting time as of shift for u8se
+
+    public String UserType = "Staff";
 
 
 
@@ -81,6 +86,9 @@ public long Start_Shift; //gets the user current starting time as of shift for u
 @FXML
 private TextField User_Name;
 
+
+
+
     @FXML
     private TextField Password;
     public void Login(ActionEvent w){
@@ -89,6 +97,11 @@ private TextField User_Name;
         String name = User_Name.getText(); // takes the name the user entered
         String password = Password.getText();
         String data_Pass;
+
+        //used to add the stats to the current user
+
+        double data_Hours;
+        double data_Revenue;
 
         try {
 
@@ -116,14 +129,21 @@ private TextField User_Name;
             while (resultSet.next()){
                 data_Name = resultSet.getString("name");
                 data_Pass = resultSet.getString("password");
+                data_Revenue = resultSet.getDouble("Revenue");
+                data_Hours = resultSet.getDouble("HoursWorked");
+
 
                 if(name.equals(data_Name.toLowerCase()) && password.equals(data_Pass.toLowerCase())){
                     Start_Shift = System.currentTimeMillis();
 
-                    
-                     System.out.println(Current_User.getName());
+
+
+                    System.out.println(Current_User.getName());
 
                      Current_User.setName(data_Name.toLowerCase());
+
+                     Current_User.setHoursWorked((long) data_Hours);
+                     Current_User.setGrossEarning((long) data_Revenue);
 
 
 
@@ -169,7 +189,6 @@ private TextField User_Name;
         Sales_Tracker.setTitle("Hello");
         Sales_Tracker.setScene(scene);
         Sales_Tracker.show();
-
     }
 
 
@@ -179,6 +198,7 @@ private TextField User_Name;
 private TextField Sale_Value;
     public void Submit_Sales(ActionEvent w){ //this is used when a user sumbits a sale in here to make it repitible
         Stage Sales = (Stage) ((Node) w.getSource()).getScene().getWindow(); //might not be needed tbd
+        System.out.println(Current_User.getGrossEarning());
 
 
         double Sale = Double.parseDouble(Sale_Value.getText());
@@ -198,12 +218,70 @@ private TextField Sale_Value;
 
     public void End_Sales(ActionEvent w) throws IOException {
 
-       employe_Start(Current_User);
+//        System.out.println(Current_User.getGrossEarning()); //tbd debug
 
-        //tbd put user end screen
+        //code below is for storing the users stats into databse
 
-        //throws the user back to employee menu
+        double End_Sales = Current_User.getGrossEarning();
+        long End_Shift = System.currentTimeMillis();
 
+        long Final_Time = End_Shift - Start_Shift;
+
+        Final_Time = Final_Time / 60000;
+        Final_Time = Final_Time/60;
+        Final_Time = Final_Time /60; //tbd add this to track hours
+
+        Current_User.setHoursWorked(Current_User.getHoursWorked() + Final_Time);
+
+
+        try {
+
+            Connection connection = DriverManager.getConnection( //creates connection with the sql databse
+                    "jdbc:mysql://127.0.0.1:3306/test",
+                    "root",
+                    "1234"
+            );
+
+
+//updates the user info
+
+
+            String SQL = "UPDATE user SET Revenue=?, HoursWorked=? WHERE name=?";
+
+            PreparedStatement statement = connection.prepareStatement(SQL);
+            statement.setDouble(1, Current_User.getGrossEarning());
+            statement.setDouble(2, Current_User.getHoursWorked());
+            statement.setString(3,Current_User.getName());
+
+            statement.executeUpdate();
+
+            connection.close();
+
+
+            Stage Sales = (Stage) ((Node) w.getSource()).getScene().getWindow();
+
+
+            Sales.close();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }catch (SQLException e){
+
+
+        }
 
     }
 
@@ -230,24 +308,43 @@ private TextField Sale_Value;
 
     public void Self_View_Submit(ActionEvent e){
 
-//        Stage Self_view = new Stage();
-//
-//        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Self_View account.fxml"));
-//        Scene scene = null;
-//        try {
-//            scene = new Scene(fxmlLoader.load(), 620, 640);
-//        } catch (IOException w) {
-//            throw new RuntimeException(w);
-//        }
-//        Self_view.setTitle("View Account");
-//        Self_view.setScene(scene);
-//        Self_view.show();
-//
-//        System.out.println(Current_User.getName());
+        Stage Self_view = new Stage();
 
-        System.out.println(Current_User.getName());
+        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Self_View_account.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 620, 640);
+        } catch (IOException w) {
+            throw new RuntimeException(w);
+        }
+        Self_view.setTitle("View Account");
+        Self_view.setScene(scene);
+        Self_view.show();
 
 
+
+
+
+
+
+    }
+
+
+
+    @FXML
+    private Label User_Hours;
+
+    @FXML
+    private Text User_Revenue;
+
+    @FXML
+    private Text User_Type;
+    public void Update_Self(ActionEvent e){
+
+        User_Hours.setText(Long.toString(Current_User.getHoursWorked()));
+        User_Type.setText(UserType);
+
+        User_Revenue.setText(Double.toString(Current_User.getGrossEarning()));
 
 
 
