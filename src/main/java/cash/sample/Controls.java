@@ -5,17 +5,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.net.ConnectException;
 import java.sql.*;
 
 public class Controls {
@@ -25,7 +20,7 @@ public class Controls {
 public static User Current_User = new User(""); //this is used to track the current users account
 public long Start_Shift; //gets the user current starting time as of shift for u8se
 
-    public String UserType = "Staff";
+
 
 
 
@@ -42,11 +37,11 @@ public long Start_Shift; //gets the user current starting time as of shift for u
 
 
 
-        Login();
+        Login_Submit();
     }
 
 
-    public static void Login() { //load the login screen
+    public static void Login_Submit() { //load the login screen
         Stage Login = new Stage();
 
 
@@ -91,17 +86,18 @@ private TextField User_Name;
 
     @FXML
     private TextField Password;
-    public void Login(ActionEvent w){
+    public void Login_Submit(ActionEvent w){
 
         String data_Name; //for checking the current database name with the user entered
         String name = User_Name.getText(); // takes the name the user entered
         String password = Password.getText();
         String data_Pass;
 
-        //used to add the stats to the current user
+        //used to add the stats to the current user object so that the users stats arnt overidden
 
         double data_Hours;
         double data_Revenue;
+        String data_Rights;
 
         try {
 
@@ -131,6 +127,7 @@ private TextField User_Name;
                 data_Pass = resultSet.getString("password");
                 data_Revenue = resultSet.getDouble("Revenue");
                 data_Hours = resultSet.getDouble("HoursWorked");
+                data_Rights = resultSet.getString("Rights");
 
 
                 if(name.equals(data_Name.toLowerCase()) && password.equals(data_Pass.toLowerCase())){
@@ -144,16 +141,30 @@ private TextField User_Name;
 
                      Current_User.setHoursWorked((long) data_Hours);
                      Current_User.setGrossEarning((long) data_Revenue);
+                     Current_User.setUser_Rights(data_Rights);
+
+                     System.out.println(data_Rights);
+                     System.out.println(Current_User.getUser_Rights());
+
+                    accountFound = true;
+
+
+                     if (Current_User.getUser_Rights().equals("Admin")){
+                         Admin_Start(Current_User);
+                         User_Login.close();
+
+                     }else{
 
 
 
                    employe_Start(Current_User);
 
-                   accountFound = true;
+
                    User_Login.close();
 
 
 
+                }
                 }
             }if (!accountFound) {
                 System.out.println("Account not found");
@@ -253,6 +264,7 @@ private TextField Sale_Value;
             statement.setDouble(2, Current_User.getHoursWorked());
             statement.setString(3,Current_User.getName());
 
+
             statement.executeUpdate();
 
             connection.close();
@@ -293,9 +305,19 @@ private TextField Sale_Value;
         Staff_Menu.setTitle("Hello");
         Staff_Menu.setScene(scene);
         Staff_Menu.show();
-
-
     }
+
+    public void Admin_Start(User user) throws IOException { //this is the start of the gui and login menu
+
+        Stage Staff_Menu = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_Main_Menu.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+        Staff_Menu.setTitle("Hello");
+        Staff_Menu.setScene(scene);
+        Staff_Menu.show();
+    }
+
+
 
     public void Logout(ActionEvent e){
 
@@ -342,7 +364,7 @@ private TextField Sale_Value;
     public void Update_Self(ActionEvent e){
 
         User_Hours.setText(Long.toString(Current_User.getHoursWorked()));
-        User_Type.setText(UserType);
+
 
         User_Revenue.setText(Double.toString(Current_User.getGrossEarning()));
 

@@ -45,10 +45,17 @@ public class User implements Serializable {
         GrossEarning = grossEarning;
     }
 
+    private String User_Rights;
 
+    public String getUser_Rights() {
+        return User_Rights;
+    }
 
+    public void setUser_Rights(String user_Rights) {
+        User_Rights = user_Rights;
+    }
 
-//    public static void View_Account(String name) {
+    //    public static void View_Account(String name) {
 //
 //        System.out.println("Please enter the name of the Employee your trying to view");
 //

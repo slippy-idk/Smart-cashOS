@@ -186,6 +186,18 @@ public class Admin_Controles {
 
     }
 
+    public void Admin_Start(User user) throws IOException { //this is the start of the gui and login menu
+
+        Stage Staff_Menu = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_Main_Menu.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+        Staff_Menu.setTitle("Hello");
+        Staff_Menu.setScene(scene);
+        Staff_Menu.show();
+
+
+    }
+
 
 
 
