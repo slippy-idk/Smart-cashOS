@@ -22,7 +22,6 @@ public  class Main extends Application {
 
     public static void main(String[] args) {
 
-        //tbd check if you can start connection of sql databse here and remove repating code
 
         launch(args);
     }

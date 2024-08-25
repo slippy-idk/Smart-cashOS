@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -65,7 +66,7 @@ public long Start_Shift; //gets the user current starting time as of shift for u
         Stage Admin_Menu = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
         FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Admin_Menu.fxml"));
-        Scene scene = null;
+        Scene scene;
         try {
             scene = new Scene(fxmlLoader.load(), 620, 640);
         } catch (IOException w) {
@@ -77,15 +78,13 @@ public long Start_Shift; //gets the user current starting time as of shift for u
 
     }
 
-
-@FXML
-private TextField User_Name;
-
-
-
-
+//the fxml before are to accesss the boxex in the login  screen
+    @FXML
+    private TextField User_Name;
     @FXML
     private TextField Password;
+
+
     public void Login_Submit(ActionEvent w){
 
         String data_Name; //for checking the current database name with the user entered
@@ -150,14 +149,14 @@ private TextField User_Name;
 
 
                      if (Current_User.getUser_Rights().equals("Admin")){
-                         Admin_Start(Current_User);
+                         Admin_Start();
                          User_Login.close();
 
                      }else{
 
 
 
-                   employe_Start(Current_User);
+                   employe_Start();
 
 
                    User_Login.close();
@@ -176,9 +175,7 @@ private TextField User_Name;
 
 
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
 
@@ -186,7 +183,7 @@ private TextField User_Name;
     }
 
 
-    public void Start_Sales(ActionEvent e) throws IOException {
+    public void Start_Sales() throws IOException {
 
         Sales(); //load the start sales for the user
 
@@ -207,8 +204,8 @@ private TextField User_Name;
 
 @FXML
 private TextField Sale_Value;
-    public void Submit_Sales(ActionEvent w){ //this is used when a user sumbits a sale in here to make it repitible
-        Stage Sales = (Stage) ((Node) w.getSource()).getScene().getWindow(); //might not be needed tbd
+    public void Submit_Sales(){ //this is used when a user sumbits a sale in here to make it repitible
+//        Stage Sales = (Stage) ((Node) w.getSource()).getScene().getWindow(); //might not be needed tbd
         System.out.println(Current_User.getGrossEarning());
 
 
@@ -227,13 +224,13 @@ private TextField Sale_Value;
 
     }
 
-    public void End_Sales(ActionEvent w) throws IOException {
+    public void End_Sales(ActionEvent w) {
 
 //        System.out.println(Current_User.getGrossEarning()); //tbd debug
 
         //code below is for storing the users stats into databse
 
-        double End_Sales = Current_User.getGrossEarning();
+//        double End_Sales = Current_User.getGrossEarning();
         long End_Shift = System.currentTimeMillis();
 
         long Final_Time = End_Shift - Start_Shift;
@@ -291,13 +288,14 @@ private TextField Sale_Value;
 
 
         }catch (SQLException e){
+            System.out.println("SQL Error");
 
 
         }
 
     }
 
-    public void employe_Start(User user) throws IOException { //this is the start of the gui and login menu
+    public void employe_Start() throws IOException { //this is the start of the gui and login menu
 
         Stage Staff_Menu = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Staff_Menu.fxml"));
@@ -307,7 +305,7 @@ private TextField Sale_Value;
         Staff_Menu.show();
     }
 
-    public void Admin_Start(User user) throws IOException { //this is the start of the gui and login menu
+    public void Admin_Start( ) throws IOException { //this is the start of the gui and login menu
 
         Stage Staff_Menu = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_Main_Menu.fxml"));
@@ -321,19 +319,32 @@ private TextField Sale_Value;
 
     public void Logout(ActionEvent e){
 
-        Current_User.End_shift(Current_User, Start_Shift);
+//        Current_User.End_shift(Current_User, Start_Shift);
+
+
+        Stage Main_Menu = (Stage) ((Node) e.getSource()).getScene().getWindow();
+
+        Main_Menu.close();
+
+
+
+
+
+
+
+        //tbd
 
         //shows the user the end of shift
 
     }
 
 
-    public void Self_View_Submit(ActionEvent e){
+    public void Self_View_Submit(){
 
         Stage Self_view = new Stage();
 
         FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Self_View_account.fxml"));
-        Scene scene = null;
+        Scene scene;
         try {
             scene = new Scene(fxmlLoader.load(), 620, 640);
         } catch (IOException w) {
@@ -359,9 +370,8 @@ private TextField Sale_Value;
     @FXML
     private Text User_Revenue;
 
-    @FXML
-    private Text User_Type;
-    public void Update_Self(ActionEvent e){
+
+    public void Update_Self(){
 
         User_Hours.setText(Long.toString(Current_User.getHoursWorked()));
 
