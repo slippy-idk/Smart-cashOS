@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cash.sample.Admin_Controles">
+   <children>
+      <Text fx:id="CreateAccountTitle" layoutX="259.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Account" />
+      <TextField fx:id="Enter_Name" layoutX="225.0" layoutY="42.0" promptText="Accont Name" />
+      <Button fx:id="Submit" layoutX="266.0" layoutY="241.0" mnemonicParsing="false" onAction="#Submit_create" text="Submit " />
+      <PasswordField fx:id="Password" layoutX="225.0" layoutY="77.0" promptText="Password" />
+      <PasswordField fx:id="Pass_Check" layoutX="224.0" layoutY="111.0" prefHeight="26.0" prefWidth="150.0" promptText="Please Re enter Password" />
+      <Text layoutX="126.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <CheckBox fx:id="Admin_Check" layoutX="227.0" layoutY="191.0" mnemonicParsing="false" text="Adminstator Privliges" />
+   </children>
+</AnchorPane>

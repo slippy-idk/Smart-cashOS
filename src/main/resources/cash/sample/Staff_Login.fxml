@@ -4,11 +4,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cash.sample.Controls">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cash.sample.Controls">
    <children>
-      <Text layoutX="255.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to staff" />
-      <TextField id="User_Name" fx:id="User_Name" layoutX="226.0" layoutY="164.0" onAction="#Login" promptText="Name" />
-      <Text layoutX="233.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter your Name" wrappingWidth="140.310546875" />
-      <Button layoutX="274.0" layoutY="223.0" mnemonicParsing="false" onAction="#Login" text="Login" />
+      <Text fx:id="LoginTitle" layoutX="226.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="     Welcome to staff" wrappingWidth="149.60000000000002" />
+      <TextField id="User_Name" fx:id="User_Name" layoutX="220.0" layoutY="99.0" onAction="#Login_Submit" promptText="Name" />
+      <Text layoutX="224.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter your Name" wrappingWidth="140.310546875" />
+      <Button layoutX="243.0" layoutY="222.0" mnemonicParsing="false" onAction="#Login_Submit" prefHeight="42.0" prefWidth="115.0" text="Login" />
+      <PasswordField id="Password" fx:id="Password" layoutX="220.0" layoutY="168.0" promptText="Password" />
+      <Text layoutX="220.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter your Password" wrappingWidth="181.9105224609375" />
    </children>
 </AnchorPane>

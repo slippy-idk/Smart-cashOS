@@ -5,25 +5,29 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-
 import java.io.IOException;
 import java.sql.*;
 
-public class Admin_Controles {
-
-    @FXML
-    private TextField Enter_Name;
+public class Admin_Controles  {
 
 
-    public void Create_Account() throws IOException {
+
+
+    public void Create_Account(ActionEvent w ) throws IOException {
+
+
+        Stage Current = (Stage) ((Node) w.getSource()).getScene().getWindow(); //for getting the main menu stage
+
+        Current.close(); //closes the main menu stage
 
 
         Stage Stage_Account_Creation = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_NameInsert.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Create_Account.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 620, 640);
         Stage_Account_Creation.setTitle("Account Creation!");
         Stage_Account_Creation.setScene(scene);
@@ -39,11 +43,26 @@ public class Admin_Controles {
 
     }
 
+//the below get a text field to get user input from the Create Account GUI
+    @FXML
+    private TextField Enter_Name;
 
-    public void Submit_create() throws IOException { //creates new account
+    @FXML
+    private Text CreateAccountTitle;
+
+    @FXML
+    private TextField Password;
+    @FXML
+    private CheckBox Admin_Check;
+    @FXML
+    private TextField Pass_Check;
+
+    public void Submit_create(ActionEvent w) throws IOException { //creates new account
 //        User.Create_Account(Enter_Name.getText());
 
         try{
+
+
 
 
             Connection connection = DriverManager.getConnection( //creates connection with the sql databse
@@ -52,19 +71,43 @@ public class Admin_Controles {
                     "1234"
             );
 
+            //used to covert text boxes to string
+
             String name = Enter_Name.getText();
+            String password = Password.getText();
+            String User_Rights = "Staff";
+            boolean Admin = Admin_Check.isSelected();
+            String Passcheck = Pass_Check.getText();
 
-            String insert = "INSERT INTO USER  (Name)"+
-                    "VALUES (?)";
+            if(Admin){ //used to check if the password was entered multiple times
+                User_Rights = "Admin";
+            }
+
+            if(! Passcheck.equals(password)){
+                CreateAccountTitle.setText("Password Is incorrect");
+            }else {
 
 
-            PreparedStatement preparedStatement= connection.prepareStatement(insert);
-            preparedStatement.setString(1, name);
+                String insert = "INSERT INTO USER  (name, password, Rights)" + //inserts the new account into the databse
+                        "VALUES (?, ?, ?)";
 
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
 
-            Back2Menu();
+                PreparedStatement preparedStatement = connection.prepareStatement(insert);
+                preparedStatement.setString(1, name.toLowerCase());
+                preparedStatement.setString(2, password.toLowerCase());
+                preparedStatement.setString(3, User_Rights);
+
+
+
+
+                preparedStatement.executeUpdate();
+                preparedStatement.close();
+
+                Stage Current = (Stage) ((Node) w.getSource()).getScene().getWindow();
+                Current.close();
+
+                Back2Menu();
+            }
 
 
 
@@ -78,7 +121,7 @@ public class Admin_Controles {
     public void View_Account() throws IOException {
         Stage Stage_Admin_Login = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_NameInsert2.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("View_Account.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 620, 640);
         Stage_Admin_Login.setTitle("Hello!");
         Stage_Admin_Login.setScene(scene);
@@ -86,11 +129,11 @@ public class Admin_Controles {
     }
 
 
-    public void Submit_View(ActionEvent w) { //submits the user request to view
+    public void Submit_View() { //submits the user request to view
 
 
 
-        String data_Name;
+        User user = new User("");
         String name = Enter_Name.getText();
 
         try {
@@ -102,7 +145,7 @@ public class Admin_Controles {
             );
 
 
-            Stage User_Login = (Stage) ((Node) w.getSource()).getScene().getWindow();
+//            Stage User_Login = (Stage) ((Node) w.getSource()).getScene().getWindow();
 
 
             String sql = "SELECT * FROM user";
@@ -113,9 +156,10 @@ public class Admin_Controles {
 
 
             while (resultSet.next()){
-                data_Name = resultSet.getString("Name");
 
-                if(name.equals(data_Name)){
+                user.setName(resultSet.getString("name"));
+
+                if(name.equals(user.getName())){
                     //tbd add in view account screen
 
 
@@ -165,6 +209,7 @@ public class Admin_Controles {
 
 
     }
+
 
 
 

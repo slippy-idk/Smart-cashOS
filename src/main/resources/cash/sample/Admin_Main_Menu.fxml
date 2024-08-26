@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cash.sample.Controls">
+   <children>
+      <Text layoutX="275.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" />
+      <Button layoutX="224.0" layoutY="91.0" mnemonicParsing="false" onAction="#Start_Sales" prefHeight="46.0" prefWidth="149.0" text="Sales Page" />
+      <Button layoutX="224.0" layoutY="177.0" mnemonicParsing="false" onAction="#Admin" prefHeight="46.0" prefWidth="150.0" text="Adminstator Page" />
+      <Button layoutX="225.0" layoutY="276.0" mnemonicParsing="false" onAction="#Logout" prefHeight="46.0" prefWidth="150.0" text="Logout" />
+   </children>
+</AnchorPane>

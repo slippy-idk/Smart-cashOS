@@ -6,7 +6,6 @@ import javafx.stage.Stage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
-import java.util.Scanner;
 /**
  * @author Lewis Perry Nickname = Slippy
  *
@@ -18,13 +17,11 @@ public  class Main extends Application {
 
 
 
-    static Scanner User_Input = new Scanner(System.in);
-    static String input;
-    //these two global variables are designed for user input
+
+
 
     public static void main(String[] args) {
 
-        //tbd check if can start connection of sql databse here and remove repating code
 
         launch(args);
     }
@@ -32,11 +29,21 @@ public  class Main extends Application {
 
 
     public  void start(Stage Main_Menu) throws IOException { //this is the start of the gui and login menu
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Sample.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
-        Main_Menu.setTitle("Main Menu");
-        Main_Menu.setScene(scene);
-        Main_Menu.show();
+        Stage Login = new Stage();
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Staff_Login.fxml"));
+        Scene scene;
+        try {
+            scene = new Scene(fxmlLoader.load(), 620, 640);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Login.setTitle("Staff Login");
+        Login.setScene(scene);
+        Login.show();
+
+        //the actuall login and checker for account is in the controller class for the sake of keeping current track of the User account
     }
 
 

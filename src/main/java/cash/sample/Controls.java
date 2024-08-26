@@ -5,44 +5,28 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.sql.*;
 
 public class Controls {
 
 
 
-public User Current_User = new User(""); //this is used to track the current users account
+public static User Current_User = new User(""); //this is used to track the current users account
 public long Start_Shift; //gets the user current starting time as of shift for u8se
 
-    
 
 
-    public void Staff(ActionEvent e){
-
-       Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
-
-       stage.close();
-
-
-
-
-
-        User.Login();
-    }
-
-    public void Admin(ActionEvent e){
+    public void Admin(ActionEvent e){ //used to load the admin menu
         Stage Admin_Menu = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
         FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Admin_Menu.fxml"));
-        Scene scene = null;
+        Scene scene;
         try {
             scene = new Scene(fxmlLoader.load(), 620, 640);
         } catch (IOException w) {
@@ -54,13 +38,29 @@ public long Start_Shift; //gets the user current starting time as of shift for u
 
     }
 
+//the fxml before are to accesss the boxex in the login  screen
+    @FXML
+    private TextField User_Name;
+    @FXML
+    private TextField Password;
 
-@FXML
-private TextField User_Name;
-    public void Login(ActionEvent w){
+    //used to display that the account was not found
+    @FXML
+    private Text LoginTitle;
+
+
+    public void Login_Submit(ActionEvent w){ //used when the user attempts a login and than handles the login process
 
         String data_Name; //for checking the current database name with the user entered
         String name = User_Name.getText(); // takes the name the user entered
+        String password = Password.getText();
+        String data_Pass;
+
+        //used to add the stats to the current user object so that the users stats arnt overidden
+
+        double data_Hours;
+        double data_Revenue;
+        String data_Rights;
 
         try {
 
@@ -71,61 +71,93 @@ private TextField User_Name;
             );
 
 
-//            Stage User_Login = (Stage) ((Node) w.getSource()).getScene().getWindow();
+            Stage User_Login = (Stage) ((Node) w.getSource()).getScene().getWindow();
 
 
-            String sql = "SELECT * FROM user";
+            String sql = "SELECT * FROM user"; //used to get the database
             Statement statement = connection.prepareStatement(sql);
 
             ResultSet resultSet = statement.executeQuery(sql);
 
 
+            //tbd rework this for the love of god
+            boolean accountFound = false;
+
+
 
             while (resultSet.next()){
-                data_Name = resultSet.getString("Name");
+                data_Name = resultSet.getString("name");
+                data_Pass = resultSet.getString("password");
+                data_Revenue = resultSet.getDouble("Revenue");
+                data_Hours = resultSet.getDouble("HoursWorked");
+                data_Rights = resultSet.getString("Rights");
 
-                if(name.equals(data_Name)){
+
+                if(name.equals(data_Name.toLowerCase()) && password.equals(data_Pass.toLowerCase())){
                     Start_Shift = System.currentTimeMillis();
-                     System.out.println(Current_User.getName());
-
-                   Current_User.employe_Start(Current_User);
-                    break;
 
 
+                     Current_User.setName(data_Name.toLowerCase());
 
-                }else {
-                    System.out.println("Account not found");
-                    // tbd put in account meny
+                     Current_User.setHoursWorked((long) data_Hours);
+                     Current_User.setGrossEarning((long) data_Revenue);
+                     Current_User.setUser_Rights(data_Rights);
+
+                    accountFound = true;
+
+
+                     if (Current_User.getUser_Rights().equals("Admin")){
+                         Admin_Start();
+                         User_Login.close();
+
+                     }else{
+
+
+
+                   employe_Start();
+
+
+                   User_Login.close();
+
+
+
                 }
+                }
+            }if (!accountFound) {
 
+                LoginTitle.setText("Account not Found");
             }
 
 
 
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+
+
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
 
 
+    } //when the user begins to login this handles the login
+
+
+    public void Start_Sales() throws IOException { //used to put the user into the sales screen
+
+        Stage Sales_Tracker = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Sales.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+        Sales_Tracker.setTitle("Hello");
+        Sales_Tracker.setScene(scene);
+        Sales_Tracker.show();
+
     }
 
-
-    public void Start_Sales(ActionEvent e) throws IOException {
-
-        User.Start_Sales(); //load the start sales for the user
-
-
-
-
-    }
 
 @FXML
 private TextField Sale_Value;
-    public void Submit_Sales(ActionEvent w){ //this is used when a user sumbits a sale in here to make it repitible
-        Stage Sales = (Stage) ((Node) w.getSource()).getScene().getWindow(); //might not be needed tbd
+    public void Submit_Sales(){ //this is used when a user sumbits a sale in here to make it repitible
+
+        System.out.println(Current_User.getGrossEarning());
 
 
         double Sale = Double.parseDouble(Sale_Value.getText());
@@ -133,6 +165,7 @@ private TextField Sale_Value;
         Current_User.setGrossEarning(Sale+Current_User.getGrossEarning());
 
         System.out.println(Current_User.getGrossEarning());
+        System.out.println(Current_User.getName());
 
 
 
@@ -142,21 +175,137 @@ private TextField Sale_Value;
 
     }
 
-    public void End_Sales(ActionEvent w) throws IOException {
+    public void End_Sales(ActionEvent w) { //used to end the sale and modify the users stats
 
-        Current_User.employe_Start(Current_User);
 
-        //throws the user back to employee menu
+        //code below is for storing the users stats into databse
+
+        long End_Shift = System.currentTimeMillis();
+
+        long Final_Time = End_Shift - Start_Shift;
+
+        Final_Time = Final_Time / 1000;
+        Final_Time = Final_Time/60;
+        Final_Time = Final_Time /60;
+
+        Current_User.setHoursWorked(Current_User.getHoursWorked() + Final_Time);
+
+
+        try {
+
+            Connection connection = DriverManager.getConnection( //creates connection with the sql databse
+                    "jdbc:mysql://127.0.0.1:3306/test",
+                    "root",
+                    "1234"
+            );
+
+
+//updates the user info
+
+
+            String SQL = "UPDATE user SET Revenue=?, HoursWorked=? WHERE name=?";
+
+            PreparedStatement statement = connection.prepareStatement(SQL);
+            statement.setDouble(1, Current_User.getGrossEarning());
+            statement.setDouble(2, Current_User.getHoursWorked());
+            statement.setString(3,Current_User.getName());
+
+
+            statement.executeUpdate();
+
+            connection.close();
+
+
+            Stage Sales = (Stage) ((Node) w.getSource()).getScene().getWindow();
+
+
+            Sales.close();
+
+
+
+        }catch (SQLException e){
+            System.out.println("SQL Error");
+
+
+        }
+
+    }
+
+    public void employe_Start() throws IOException { //this is the start of the gui and login menu
+
+        Stage Staff_Menu = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Staff_Menu.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+        Staff_Menu.setTitle("Hello");
+        Staff_Menu.setScene(scene);
+        Staff_Menu.show();
+    }
+
+    public void Admin_Start( ) throws IOException { //this is the start of the gui and login menu
+
+        Stage Staff_Menu = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_Main_Menu.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+        Staff_Menu.setTitle("Hello");
+        Staff_Menu.setScene(scene);
+        Staff_Menu.show();
+    }
+
+
+
+    public void Logout(ActionEvent e){ //lets the user logout
+
+        Stage Main_Menu = (Stage) ((Node) e.getSource()).getScene().getWindow();
+
+        Main_Menu.close();
+
+
 
 
     }
 
 
-    public void Logout(ActionEvent e){
+    public void Self_View_Submit(){ //allows the user to view their own account doesnt use the databse as we have their stats in current user
 
-        Current_User.End_shift(Current_User, Start_Shift);
+        Stage Self_view = new Stage();
 
-        //shows the user the end of shift
+        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Self_View_account.fxml"));
+        Scene scene;
+        try {
+            scene = new Scene(fxmlLoader.load(), 620, 640);
+        } catch (IOException w) {
+            throw new RuntimeException(w);
+        }
+        Self_view.setTitle("View Account");
+        Self_view.setScene(scene);
+        Self_view.show();
+
+
+
+
+
+
+
+    }
+
+
+
+    @FXML
+    private Label User_Hours;
+
+    @FXML
+    private Text User_Revenue;
+
+
+    public void Update_Self(){ //used to update the self view screen due to the way labels are loaded this is needed
+
+        User_Hours.setText(Long.toString(Current_User.getHoursWorked()));
+
+
+        User_Revenue.setText(Double.toString(Current_User.getGrossEarning()));
+
+
+
 
     }
 }
