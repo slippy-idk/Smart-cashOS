@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -23,46 +22,7 @@ public long Start_Shift; //gets the user current starting time as of shift for u
 
 
 
-
-
-    
-
-
-    public void Staff(ActionEvent e){
-
-       Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
-
-       stage.close();
-
-
-
-
-
-        Login_Submit();
-    }
-
-
-    public static void Login_Submit() { //load the login screen
-        Stage Login = new Stage();
-
-
-        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Staff_Login.fxml"));
-        Scene scene;
-        try {
-            scene = new Scene(fxmlLoader.load(), 620, 640);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        Login.setTitle("Staff Login");
-        Login.setScene(scene);
-        Login.show();
-
-        //the actuall login and checker for account is in the controller class for the sake of keeping current track of the User account
-
-
-    }
-
-    public void Admin(ActionEvent e){
+    public void Admin(ActionEvent e){ //used to load the admin menu
         Stage Admin_Menu = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
         FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Admin_Menu.fxml"));
@@ -84,8 +44,12 @@ public long Start_Shift; //gets the user current starting time as of shift for u
     @FXML
     private TextField Password;
 
+    //used to display that the account was not found
+    @FXML
+    private Text LoginTitle;
 
-    public void Login_Submit(ActionEvent w){
+
+    public void Login_Submit(ActionEvent w){ //used when the user attempts a login and than handles the login process
 
         String data_Name; //for checking the current database name with the user entered
         String name = User_Name.getText(); // takes the name the user entered
@@ -110,7 +74,7 @@ public long Start_Shift; //gets the user current starting time as of shift for u
             Stage User_Login = (Stage) ((Node) w.getSource()).getScene().getWindow();
 
 
-            String sql = "SELECT * FROM user";
+            String sql = "SELECT * FROM user"; //used to get the database
             Statement statement = connection.prepareStatement(sql);
 
             ResultSet resultSet = statement.executeQuery(sql);
@@ -133,17 +97,11 @@ public long Start_Shift; //gets the user current starting time as of shift for u
                     Start_Shift = System.currentTimeMillis();
 
 
-
-                    System.out.println(Current_User.getName());
-
                      Current_User.setName(data_Name.toLowerCase());
 
                      Current_User.setHoursWorked((long) data_Hours);
                      Current_User.setGrossEarning((long) data_Revenue);
                      Current_User.setUser_Rights(data_Rights);
-
-                     System.out.println(data_Rights);
-                     System.out.println(Current_User.getUser_Rights());
 
                     accountFound = true;
 
@@ -166,8 +124,8 @@ public long Start_Shift; //gets the user current starting time as of shift for u
                 }
                 }
             }if (!accountFound) {
-                System.out.println("Account not found");
-                // tbd put in account menu
+
+                LoginTitle.setText("Account not Found");
             }
 
 
@@ -180,16 +138,10 @@ public long Start_Shift; //gets the user current starting time as of shift for u
         }
 
 
-    }
+    } //when the user begins to login this handles the login
 
 
-    public void Start_Sales() throws IOException {
-
-        Sales(); //load the start sales for the user
-
-    }
-
-    public static void Sales() throws IOException { //loads the start of sales screen the sales screen is handled in control tab
+    public void Start_Sales() throws IOException { //used to put the user into the sales screen
 
         Stage Sales_Tracker = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Sales.fxml"));
@@ -197,15 +149,14 @@ public long Start_Shift; //gets the user current starting time as of shift for u
         Sales_Tracker.setTitle("Hello");
         Sales_Tracker.setScene(scene);
         Sales_Tracker.show();
+
     }
-
-
 
 
 @FXML
 private TextField Sale_Value;
     public void Submit_Sales(){ //this is used when a user sumbits a sale in here to make it repitible
-//        Stage Sales = (Stage) ((Node) w.getSource()).getScene().getWindow(); //might not be needed tbd
+
         System.out.println(Current_User.getGrossEarning());
 
 
@@ -224,20 +175,18 @@ private TextField Sale_Value;
 
     }
 
-    public void End_Sales(ActionEvent w) {
+    public void End_Sales(ActionEvent w) { //used to end the sale and modify the users stats
 
-//        System.out.println(Current_User.getGrossEarning()); //tbd debug
 
         //code below is for storing the users stats into databse
 
-//        double End_Sales = Current_User.getGrossEarning();
         long End_Shift = System.currentTimeMillis();
 
         long Final_Time = End_Shift - Start_Shift;
 
-        Final_Time = Final_Time / 60000;
+        Final_Time = Final_Time / 1000;
         Final_Time = Final_Time/60;
-        Final_Time = Final_Time /60; //tbd add this to track hours
+        Final_Time = Final_Time /60;
 
         Current_User.setHoursWorked(Current_User.getHoursWorked() + Final_Time);
 
@@ -274,19 +223,6 @@ private TextField Sale_Value;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         }catch (SQLException e){
             System.out.println("SQL Error");
 
@@ -317,10 +253,7 @@ private TextField Sale_Value;
 
 
 
-    public void Logout(ActionEvent e){
-
-//        Current_User.End_shift(Current_User, Start_Shift);
-
+    public void Logout(ActionEvent e){ //lets the user logout
 
         Stage Main_Menu = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
@@ -329,17 +262,10 @@ private TextField Sale_Value;
 
 
 
-
-
-
-        //tbd
-
-        //shows the user the end of shift
-
     }
 
 
-    public void Self_View_Submit(){
+    public void Self_View_Submit(){ //allows the user to view their own account doesnt use the databse as we have their stats in current user
 
         Stage Self_view = new Stage();
 
@@ -371,7 +297,7 @@ private TextField Sale_Value;
     private Text User_Revenue;
 
 
-    public void Update_Self(){
+    public void Update_Self(){ //used to update the self view screen due to the way labels are loaded this is needed
 
         User_Hours.setText(Long.toString(Current_User.getHoursWorked()));
 

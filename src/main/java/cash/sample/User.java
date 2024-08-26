@@ -53,43 +53,4 @@ public class User implements Serializable {
     }
 
 
-
-
-
-
-
-
-
-
-
-//    public void End_shift(User User, long Start_Shift) {
-////        long End_Shift = System.currentTimeMillis();
-////
-////
-////        End_Shift = End_Shift - Start_Shift;
-////
-////        long Hours = End_Shift/1000;
-////        Hours = Hours/60;
-////        Hours = Hours/60;
-////
-////        User.setHoursWorked(Hours);
-////
-////        System.out.println("You have worked this amount of Hours");
-////        System.out.println(User.getHoursWorked());
-////
-////        System.out.println("You Gross Earnings is");
-////        System.out.println(User.getGrossEarning());
-////
-////
-////        System.out.println(" "); // used to space menu and the end shift screen
-//
-//
-//        //tbd put in gui for displaying end
-//
-//        //put all this on screen
-//
-//
-//
-//
-//    }
 }

@@ -3,19 +3,14 @@ package cash.sample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-
 import java.io.IOException;
-import java.net.URL;
 import java.sql.*;
-import java.util.ResourceBundle;
 
 public class Admin_Controles  {
 
@@ -53,9 +48,14 @@ public class Admin_Controles  {
     private TextField Enter_Name;
 
     @FXML
+    private Text CreateAccountTitle;
+
+    @FXML
     private TextField Password;
     @FXML
     private CheckBox Admin_Check;
+    @FXML
+    private TextField Pass_Check;
 
     public void Submit_create(ActionEvent w) throws IOException { //creates new account
 //        User.Create_Account(Enter_Name.getText());
@@ -71,36 +71,43 @@ public class Admin_Controles  {
                     "1234"
             );
 
+            //used to covert text boxes to string
+
             String name = Enter_Name.getText();
             String password = Password.getText();
             String User_Rights = "Staff";
             boolean Admin = Admin_Check.isSelected();
+            String Passcheck = Pass_Check.getText();
 
-            if(Admin == true){
+            if(Admin){ //used to check if the password was entered multiple times
                 User_Rights = "Admin";
             }
 
+            if(! Passcheck.equals(password)){
+                CreateAccountTitle.setText("Password Is incorrect");
+            }else {
 
 
-            String insert = "INSERT INTO USER  (name, password, Rights)"+
-                    "VALUES (?, ?, ?)";
+                String insert = "INSERT INTO USER  (name, password, Rights)" + //inserts the new account into the databse
+                        "VALUES (?, ?, ?)";
 
 
-            PreparedStatement preparedStatement= connection.prepareStatement(insert);
-            preparedStatement.setString(1, name.toLowerCase());
-            preparedStatement.setString(2, password.toLowerCase());
-            preparedStatement.setString(3, User_Rights);
+                PreparedStatement preparedStatement = connection.prepareStatement(insert);
+                preparedStatement.setString(1, name.toLowerCase());
+                preparedStatement.setString(2, password.toLowerCase());
+                preparedStatement.setString(3, User_Rights);
 
 
-            //tbd enter code for cheching password
 
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
 
-            Stage Current = (Stage) ((Node) w.getSource()).getScene().getWindow();
-            Current.close();
+                preparedStatement.executeUpdate();
+                preparedStatement.close();
 
-            Back2Menu();
+                Stage Current = (Stage) ((Node) w.getSource()).getScene().getWindow();
+                Current.close();
+
+                Back2Menu();
+            }
 
 
 
@@ -203,17 +210,7 @@ public class Admin_Controles  {
 
     }
 
-    public void Admin_Start() throws IOException { //this is the start of the gui and login menu
 
-        Stage Staff_Menu = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_Main_Menu.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
-        Staff_Menu.setTitle("Hello");
-        Staff_Menu.setScene(scene);
-        Staff_Menu.show();
-
-
-    }
 
 
 
