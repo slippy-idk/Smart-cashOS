@@ -16,12 +16,16 @@ You will need:
 * An OS (operating system): Linux, Windows, or macOS
 * Python 3.8+
 * Git
+* A MySql Database
+
+* More documentation about the software you might find helpfull are included in the project folder such as api doccumentation which can be helpfull for using javafx
 
 
 ## Installation process:
 Follow these steps to get a copy of the Smart-cashOS up and running on your local machine for development and testing purposes.
 
 1. Fork and Clone the repository on your github account
+2. Open the software in a IDE and make sure the lib folder is selected as a libary in the IDE
 
 
 **Fork the Repository:**
@@ -46,6 +50,14 @@ Firstly you will need to fork this repository to your own github account. Aftwar
 2. Install packages/requirements 
 After forking and cloning the repository, you need to install the necessary modules.
 Check you have [Node.js](https://nodejs.org/) installed on your machine, this is essential when working on this project.
+
+You will also need a Mysql dtaabse to run the software once the mysql databse is downloaded you will also need to download a mysql connector for establshing a connection between the software and the database 
+[Mysql](https://dev.mysql.com/downloads/installer/)
+[Mysql Connector](https://www.mysql.com/products/connector/)
+
+
+While not needed javaFX scenebuilder is reccomended as this software includes javafx code that was made in scene builder and this helps with the creation of the GUI
+
 
 **Install packages:**
 - In your terminal, run:
