@@ -130,7 +130,7 @@ public class Admin_Controles  {
     @FXML
     Text Create_Item_Error;
 
-    public void Create_Item() throws IOException{ //used to create items in the item table
+    public void Create_Item( ) throws IOException{ //used to create items in the item table
 
 
         try {
@@ -141,21 +141,50 @@ public class Admin_Controles  {
             BigDecimal Item_Price = new BigDecimal(Create_Item_ItemPrice.getText());
             BigDecimal Item_Price_Rounder;
 
-            Item_Price_Rounder = Item_Price.setScale(2, RoundingMode.FLOOR);  // this is used to round 
+
+
+            Item_Price_Rounder = Item_Price.setScale(1, RoundingMode.FLOOR);  // this is used to round
+
+            Double price = Item_Price_Rounder.doubleValue();
 
 
             System.out.println(Item_Price_Rounder);
+            System.out.println(price);
 
 
+
+
+            Connection connection = DriverManager.getConnection( //creates connection with the sql databse
+                    "jdbc:mysql://127.0.0.1:3306/test",
+                    "root",
+                    "1234"
+            );
+
+
+            String insert = "INSERT INTO items  (Name, Price)" + //inserts the new account into the databse
+                    "VALUES (?, ?)";
+
+
+            PreparedStatement preparedStatement = connection.prepareStatement(insert);
+
+            preparedStatement.setString(1, Item_Name);
+            preparedStatement.setDouble(2, price);
+
+
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+            Create_Item_Error.setText("Item Created");
 
 
 
         }catch (NumberFormatException q){
             Create_Item_Error.setText("Please enter a Number");
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-
-
 
 
     }
