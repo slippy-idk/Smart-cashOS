@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.*;
 
 public class Admin_Controles  {
@@ -118,6 +119,37 @@ public class Admin_Controles  {
 
     }
 
+
+    @FXML
+    TextField Create_Item_ItemName;
+
+    @FXML
+    TextField Create_Item_ItemPrice;
+
+    @FXML
+    Text Create_Item_Error;
+
+    public void Create_Item() throws IOException{ //used to create items in the item table
+
+
+        try {
+
+
+            String Item_Name = Create_Item_ItemName.getText();
+
+            BigDecimal Item_Price = new BigDecimal(Create_Item_ItemPrice.getText());
+
+            System.out.println(Item_Price);
+        }catch (NumberFormatException q){
+            Create_Item_Error.setText("Please enter a Number");
+
+        }
+
+
+
+
+    }
+
     public void View_Account() throws IOException {
         Stage Stage_Admin_Login = new Stage();
 
@@ -179,6 +211,26 @@ public class Admin_Controles  {
     } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    public void CreateItem_Menu(ActionEvent event) throws IOException {
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow(); //gets the current window to back out
+
+        stage.close();
+
+        Stage CreateItem = new Stage();
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Create_Item.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+        CreateItem.setTitle("Creation Item");
+        CreateItem.setScene(scene);
+        CreateItem.show();
+
+
+
     }
 
     public void Backout(ActionEvent e) throws IOException { // this loads back to the login screen
