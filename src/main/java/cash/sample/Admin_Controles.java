@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.*;
 
 public class Admin_Controles  {
@@ -138,8 +139,17 @@ public class Admin_Controles  {
             String Item_Name = Create_Item_ItemName.getText();
 
             BigDecimal Item_Price = new BigDecimal(Create_Item_ItemPrice.getText());
+            BigDecimal Item_Price_Rounder;
 
-            System.out.println(Item_Price);
+            Item_Price_Rounder = Item_Price.setScale(2, RoundingMode.FLOOR);
+
+
+            System.out.println(Item_Price_Rounder);
+
+
+
+
+
         }catch (NumberFormatException q){
             Create_Item_Error.setText("Please enter a Number");
 
