@@ -141,7 +141,7 @@ public class Admin_Controles  {
             BigDecimal Item_Price = new BigDecimal(Create_Item_ItemPrice.getText());
             BigDecimal Item_Price_Rounder;
 
-            Item_Price_Rounder = Item_Price.setScale(2, RoundingMode.FLOOR);
+            Item_Price_Rounder = Item_Price.setScale(2, RoundingMode.FLOOR);  // this is used to round 
 
 
             System.out.println(Item_Price_Rounder);
