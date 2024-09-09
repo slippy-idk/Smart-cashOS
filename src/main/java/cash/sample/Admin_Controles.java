@@ -10,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.*;
 
 public class Admin_Controles  {
@@ -103,16 +105,84 @@ public class Admin_Controles  {
                 preparedStatement.executeUpdate();
                 preparedStatement.close();
 
-                Stage Current = (Stage) ((Node) w.getSource()).getScene().getWindow();
-                Current.close();
 
-                Back2Menu();
+
+                Back2Menu(w);
             }
 
 
 
         }catch (SQLException e){
             System.out.println("Error");
+        }
+
+
+    }
+
+
+    @FXML
+    TextField Create_Item_ItemName;
+
+    @FXML
+    TextField Create_Item_ItemPrice;
+
+    @FXML
+    Text Create_Item_Error;
+
+    public void Create_Item( ) throws IOException{ //used to create items in the item table
+
+
+        try {
+
+
+            String Item_Name = Create_Item_ItemName.getText();
+
+            BigDecimal Item_Price = new BigDecimal(Create_Item_ItemPrice.getText());
+            BigDecimal Item_Price_Rounder;
+
+
+
+            Item_Price_Rounder = Item_Price.setScale(1, RoundingMode.FLOOR);  // this is used to round
+
+            Double price = Item_Price_Rounder.doubleValue();
+
+
+            System.out.println(Item_Price_Rounder);
+            System.out.println(price);
+
+
+
+
+            Connection connection = DriverManager.getConnection( //creates connection with the sql databse
+                    "jdbc:mysql://127.0.0.1:3306/test",
+                    "root",
+                    "1234"
+            );
+
+
+            String insert = "INSERT INTO items  (Name, Price)" + //inserts the new account into the databse
+                    "VALUES (?, ?)";
+
+
+            PreparedStatement preparedStatement = connection.prepareStatement(insert);
+
+            preparedStatement.setString(1, Item_Name);
+            preparedStatement.setDouble(2, price);
+
+
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+            Create_Item_Error.setText("Item Created");
+
+
+
+        }catch (NumberFormatException q){
+            Create_Item_Error.setText("Please enter a Number");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
 
@@ -181,6 +251,26 @@ public class Admin_Controles  {
         }
     }
 
+
+    public void CreateItem_Menu(ActionEvent event) throws IOException {
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow(); //gets the current window to back out
+
+        stage.close();
+
+        Stage CreateItem = new Stage();
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Create_Item.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+        CreateItem.setTitle("Creation Item");
+        CreateItem.setScene(scene);
+        CreateItem.show();
+
+
+
+    }
+
     public void Backout(ActionEvent e) throws IOException { // this loads back to the login screen
         Main main = new Main();
 
@@ -197,7 +287,7 @@ public class Admin_Controles  {
     }
 
 
-    public void Back2Menu() throws IOException { //returns the user back to menu
+    public void Back2Menu(ActionEvent e) throws IOException { //returns the user back to menu
 
         Stage Stage_Admin_Menu = new Stage();
 
@@ -206,6 +296,9 @@ public class Admin_Controles  {
         Stage_Admin_Menu.setTitle("Admin Menu");
         Stage_Admin_Menu.setScene(scene);
         Stage_Admin_Menu.show();
+
+        Stage Current = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Current.close();
 
 
     }

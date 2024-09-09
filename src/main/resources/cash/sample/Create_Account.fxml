@@ -13,5 +13,6 @@
       <PasswordField fx:id="Pass_Check" layoutX="224.0" layoutY="111.0" prefHeight="26.0" prefWidth="150.0" promptText="Please Re enter Password" />
       <Text layoutX="126.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <CheckBox fx:id="Admin_Check" layoutX="227.0" layoutY="191.0" mnemonicParsing="false" text="Adminstator Privliges" />
+      <Button layoutX="266.0" layoutY="289.0" mnemonicParsing="false" onAction="#Back2Menu" prefHeight="26.0" prefWidth="58.0" text="Exit" />
    </children>
 </AnchorPane>

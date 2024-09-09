@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Controls {
 
@@ -144,13 +145,103 @@ public long Start_Shift; //gets the user current starting time as of shift for u
     public void Start_Sales() throws IOException { //used to put the user into the sales screen
 
         Stage Sales_Tracker = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Sales.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Item_Sales.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 620, 640);
         Sales_Tracker.setTitle("Hello");
         Sales_Tracker.setScene(scene);
         Sales_Tracker.show();
 
     }
+
+    ArrayList<String> items = new ArrayList<>(); //global tbd
+    ArrayList<Double> price = new ArrayList<>(); //global tbd
+@FXML
+    private TextField ItemAdd;
+
+@FXML
+private Text ItemSaleError;
+    public void ItemSales() throws SQLException {
+        String Current_Item;
+        Current_Item = ItemAdd.getText().toLowerCase();
+
+        String sql = "SELECT * FROM items ";
+
+        Connection connection = DriverManager.getConnection( //creates connection with the sql databse
+                "jdbc:mysql://127.0.0.1:3306/test",
+                "root",
+                "1234"
+        );
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        ResultSet resultSet = preparedStatement.executeQuery(sql);
+
+        boolean ItemFound= false;
+
+        while (resultSet.next()){
+            String data_Item = resultSet.getString("Name");
+            double data_Price = Double.parseDouble(resultSet.getString("Price"));
+
+
+
+
+            if(Current_Item.equals(data_Item.toLowerCase())){
+                items.add(data_Item);
+                price.add(data_Price);
+                ItemSaleError.setText("Added Item");
+                ItemFound = true;
+
+            }
+        }
+        if (!ItemFound){
+            ItemSaleError.setText("The Item has not been found");
+        }
+
+
+    }
+
+
+    public void ItemSaleEnd(ActionEvent e) throws SQLException {
+        String CurrentItem;
+        double SaleWorth = 0;
+
+        Connection connection = DriverManager.getConnection( //creates connection with the sql databse
+                "jdbc:mysql://127.0.0.1:3306/test",
+                "root",
+                "1234"
+        );
+
+        for(int i = 0;  i < items.size(); i++){
+            CurrentItem = items.get(i);
+
+            String Updatesql = "Update items SET Sales_Ammount= Sales_Ammount + 1 WHERE Name=?";
+
+
+            PreparedStatement preparedStatement = connection.prepareStatement(Updatesql);
+
+            preparedStatement.setString(1, CurrentItem);
+
+            preparedStatement.executeUpdate();
+
+            SaleWorth = SaleWorth + price.get(i);
+
+        }
+connection.close();
+
+        Current_User.setGrossEarning(Current_User.getGrossEarning() + SaleWorth);
+        ItemSaleError.setText("Sale Succeded");
+
+
+
+    }
+
+
+
+
+
+
+
+
 
 
 @FXML
