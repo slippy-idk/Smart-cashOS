@@ -105,10 +105,9 @@ public class Admin_Controles  {
                 preparedStatement.executeUpdate();
                 preparedStatement.close();
 
-                Stage Current = (Stage) ((Node) w.getSource()).getScene().getWindow();
-                Current.close();
 
-                Back2Menu();
+
+                Back2Menu(w);
             }
 
 
@@ -288,7 +287,7 @@ public class Admin_Controles  {
     }
 
 
-    public void Back2Menu() throws IOException { //returns the user back to menu
+    public void Back2Menu(ActionEvent e) throws IOException { //returns the user back to menu
 
         Stage Stage_Admin_Menu = new Stage();
 
@@ -297,6 +296,9 @@ public class Admin_Controles  {
         Stage_Admin_Menu.setTitle("Admin Menu");
         Stage_Admin_Menu.setScene(scene);
         Stage_Admin_Menu.show();
+
+        Stage Current = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Current.close();
 
 
     }
