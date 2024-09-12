@@ -9,10 +9,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Controls {
 
@@ -229,8 +232,42 @@ private Text ItemSaleError;
 connection.close();
 
         Current_User.setGrossEarning(Current_User.getGrossEarning() + SaleWorth);
+
+
         ItemSaleError.setText("Sale Succeded");
 
+        Sale_Tracker();
+
+
+
+    }
+
+    public void Sale_Tracker() throws SQLException { //used to get the date of the sales and add them to the sales database
+
+        Connection connection = DriverManager.getConnection( //creates connection with the sql databse
+                "jdbc:mysql://127.0.0.1:3306/test",
+                "root",
+                "1234"
+        );
+
+        String sql = "INSERT into Sales (Name,Date,Time) "+
+                "VALUES (?,?,?)";
+
+
+        //used to create a date format and get the dates only  used here so no need for global
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/YY");
+
+        for(int i = 0; i < items.size(); i++){
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, items.get(i));
+            preparedStatement.setString(2, java.time.LocalDateTime.now().toString() );
+            preparedStatement.setString(3,java.time.LocalTime.now().toString());
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        }
 
 
     }

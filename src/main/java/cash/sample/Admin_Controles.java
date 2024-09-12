@@ -160,7 +160,7 @@ public class Admin_Controles  {
             );
 
 
-            String insert = "INSERT INTO items  (Name, Price)" + //inserts the new account into the databse
+            String insert = "INSERT INTO items  (Name, Price)" + //inserts the new item into the databse
                     "VALUES (?, ?)";
 
 
