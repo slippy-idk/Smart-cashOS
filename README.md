@@ -53,7 +53,10 @@ Check you have [Node.js](https://nodejs.org/) installed on your machine, this is
 
 You will also need a Mysql dtaabse to run the software once the mysql databse is downloaded you will also need to download a mysql connector for establshing a connection between the software and the database 
 [Mysql](https://dev.mysql.com/downloads/installer/)
-[Mysql Connector](https://www.mysql.com/products/connector/)
+[Mysql Connector](https://www.mysql.com/products/connector/) you have to include this in the libary of the project structure
+
+the test database used for testing is currently as of writing included in the realeses and should allow you to import it into mysql allowing you to have access to the database
+
 
 
 While not needed javaFX scenebuilder is reccomended as this software includes javafx code that was made in scene builder and this helps with the creation of the GUI
