@@ -10,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.io.IOException;
 import java.sql.*;
@@ -256,14 +258,15 @@ connection.close();
 
         //used to create a date format and get the dates only  used here so no need for global
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/YY");
+        DateTimeFormatter Time = DateTimeFormatter.ofPattern("HH:mm:ss");
+        DateTimeFormatter date = DateTimeFormatter.ofPattern("dd:MM:yyyy");
 
-        for(int i = 0; i < items.size(); i++){
+        for (String item : items) {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setString(1, items.get(i));
-            preparedStatement.setString(2, java.time.LocalDateTime.now().toString() );
-            preparedStatement.setString(3,java.time.LocalTime.now().toString());
+            preparedStatement.setString(1, item);
+            preparedStatement.setString(2, String.format(LocalDate.now().format(date)));
+            preparedStatement.setString(3, String.format(LocalTime.now().format(Time)));
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
