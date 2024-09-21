@@ -57,6 +57,8 @@ You will also need a Mysql dtaabse to run the software once the mysql databse is
 
 the test database used for testing is currently as of writing included in the realeses and should allow you to import it into mysql allowing you to have access to the database
 
+the software UsesJavaFX for the GUI this is included in the libary folder of the code and you may need to add it into the libary folder in your IDE
+
 
 
 While not needed javaFX scenebuilder is reccomended as this software includes javafx code that was made in scene builder and this helps with the creation of the GUI
