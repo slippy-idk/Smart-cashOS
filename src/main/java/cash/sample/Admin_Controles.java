@@ -129,6 +129,9 @@ public class Admin_Controles  {
     @FXML
     Text Create_Item_Error;
 
+    @FXML
+    CheckBox Create_Item_Restricted ;
+
     public void Create_Item( ) throws IOException{ //used to create items in the item table
 
 
@@ -150,6 +153,14 @@ public class Admin_Controles  {
             System.out.println(Item_Price_Rounder);
             System.out.println(price);
 
+            int restricted;
+
+            if(Create_Item_Restricted.isSelected()){
+                restricted = 1;
+            }else {
+                restricted = 0;
+            }
+
 
 
 
@@ -160,14 +171,15 @@ public class Admin_Controles  {
             );
 
 
-            String insert = "INSERT INTO items  (Name, Price)" + //inserts the new item into the databse
-                    "VALUES (?, ?)";
+            String insert = "INSERT INTO items  (Name, Price, Restricted_Item)" + //inserts the new item into the databse
+                    "VALUES (?, ?, ?)";
 
 
             PreparedStatement preparedStatement = connection.prepareStatement(insert);
 
             preparedStatement.setString(1, Item_Name);
             preparedStatement.setDouble(2, price);
+            preparedStatement.setInt(3,restricted);
 
 
 
