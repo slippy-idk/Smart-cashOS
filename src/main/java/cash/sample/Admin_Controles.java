@@ -132,7 +132,7 @@ public class Admin_Controles  {
     @FXML
     CheckBox Create_Item_Restricted ;
 
-    public void Create_Item( ) throws IOException{ //used to create items in the item table
+    public void Create_Item( ) { //used to create items in the item table
 
 
         try {
