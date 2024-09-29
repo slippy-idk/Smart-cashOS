@@ -7,10 +7,18 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cash.sample.Admin_Controles">
    <children>
       <Text layoutX="221.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to The Admin Menu" wrappingWidth="184.24847412109375" />
+ Version-0.4
+      <Button layoutX="233.0" layoutY="45.0" mnemonicParsing="false" onAction="#Create_Account" prefHeight="50.0" prefWidth="134.0" text="Create an Acount" />
+      <Button layoutX="231.0" layoutY="102.0" mnemonicParsing="false" onAction="#View_Account" prefHeight="50.0" prefWidth="134.0" text="View an Account" />
+      <Button layoutX="231.0" layoutY="284.0" mnemonicParsing="false" onAction="#Backout" prefHeight="50.0" prefWidth="134.0" text="Back to the Menu" />
+      <Button fx:id="CreateItem_Page" layoutX="231.0" layoutY="163.0" mnemonicParsing="false" onAction="#CreateItem_Menu" prefHeight="50.0" prefWidth="134.0" text="Create Item" />
+      <Button layoutX="231.0" layoutY="224.0" mnemonicParsing="false" onAction="#DeleteItemMenu" prefHeight="50.0" prefWidth="134.0" text="Delete Item" />
+
       <Button layoutX="233.0" layoutY="54.0" mnemonicParsing="false" onAction="#Create_Account" prefHeight="50.0" prefWidth="134.0" text="Create an Acount" />
       <Button layoutX="231.0" layoutY="114.0" mnemonicParsing="false" onAction="#View_Account" prefHeight="50.0" prefWidth="134.0" text="View an Account" />
       <Button layoutX="231.0" layoutY="307.0" mnemonicParsing="false" onAction="#Backout" prefHeight="50.0" prefWidth="134.0" text="Back to the Menu" />
       <Button fx:id="CreateItem_Page" layoutX="231.0" layoutY="175.0" mnemonicParsing="false" onAction="#CreateItem_Menu" prefHeight="50.0" prefWidth="134.0" text="Create Item" />
       <Button layoutX="231.0" layoutY="240.0" mnemonicParsing="false" onAction="#CreateStock_Menu" prefHeight="50.0" prefWidth="134.0" text="Stock Items" />
+ main
    </children>
 </AnchorPane>

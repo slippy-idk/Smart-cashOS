@@ -129,7 +129,10 @@ public class Admin_Controles  {
     @FXML
     Text Create_Item_Error;
 
-    public void Create_Item( ) throws IOException{ //used to create items in the item table
+    @FXML
+    CheckBox Create_Item_Restricted ;
+
+    public void Create_Item( ) { //used to create items in the item table
 
 
         try {
@@ -150,6 +153,14 @@ public class Admin_Controles  {
             System.out.println(Item_Price_Rounder);
             System.out.println(price);
 
+            int restricted;
+
+            if(Create_Item_Restricted.isSelected()){
+                restricted = 1;
+            }else {
+                restricted = 0;
+            }
+
 
 
 
@@ -160,14 +171,15 @@ public class Admin_Controles  {
             );
 
 
-            String insert = "INSERT INTO items  (Name, Price)" + //inserts the new item into the databse
-                    "VALUES (?, ?)";
+            String insert = "INSERT INTO items  (Name, Price, Restricted_Item)" + //inserts the new item into the databse
+                    "VALUES (?, ?, ?)";
 
 
             PreparedStatement preparedStatement = connection.prepareStatement(insert);
 
             preparedStatement.setString(1, Item_Name);
             preparedStatement.setDouble(2, price);
+            preparedStatement.setInt(3,restricted);
 
 
 
@@ -184,6 +196,46 @@ public class Admin_Controles  {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+
+    }
+
+
+    @FXML
+    TextField Delete_ItemText;
+
+    @FXML
+    Text DeleteItemError;
+    public void Delete_Item() throws SQLException { //deletes an Item
+
+
+        Connection connection = DriverManager.getConnection( //creates connection with the sql databse
+                "jdbc:mysql://127.0.0.1:3306/test",
+                "root",
+                "1234"
+        );
+
+        String sql = "DELETE FROM items WHERE Name =  ?";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        preparedStatement.setString(1,Delete_ItemText.getText().toLowerCase());
+
+
+
+           int affectedRows = preparedStatement.executeUpdate();
+
+        if (affectedRows == 1) {
+            DeleteItemError.setText("Deleted Item");
+        } else if (affectedRows == 0) {
+            DeleteItemError.setText("Item not Found");
+        } else {
+            DeleteItemError.setText("There was an unexcpected Item");
+        }
+
+
+
+
 
 
     }
@@ -317,6 +369,20 @@ public class Admin_Controles  {
 
     }
 
+ Version-0.4
+    public void DeleteItemMenu() throws IOException {
+        Stage Stage_Admin_Menu = new Stage();
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_DeleteITem.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+        Stage_Admin_Menu.setTitle("Delete Item");
+        Stage_Admin_Menu.setScene(scene);
+        Stage_Admin_Menu.show();
+    }
+
+    public void Backout(ActionEvent e) throws IOException { // this loads back to the login screen
+
     public void CreateStock_Menu(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow(); //gets the current window to back out
 
@@ -334,6 +400,7 @@ public class Admin_Controles  {
     }
 
     public void Backout(ActionEvent e) throws IOException { // this loads back to the login screen tbd refactor name
+ main
         Main main = new Main();
 
 

@@ -1,22 +1,22 @@
 package cash.sample;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import java.text.SimpleDateFormat;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Controls {
@@ -165,7 +165,7 @@ public long Start_Shift; //gets the user current starting time as of shift for u
 
 @FXML
 private Text ItemSaleError;
-    public void ItemSales() throws SQLException {
+    public void ItemSales() throws SQLException, IOException {
         String Current_Item;
         Current_Item = ItemAdd.getText().toLowerCase();
 
@@ -186,13 +186,19 @@ private Text ItemSaleError;
         while (resultSet.next()){
             String data_Item = resultSet.getString("Name");
             double data_Price = Double.parseDouble(resultSet.getString("Price"));
-
-
+            int Restricted = resultSet.getInt("Restricted");
 
 
             if(Current_Item.equals(data_Item.toLowerCase())){
+
+                if(Restricted == 1){
+                    Create_ItemRestrictedPage();
+
+                }
+
                 items.add(data_Item);
                 price.add(data_Price);
+
                 ItemSaleError.setText("Added Item");
                 ItemFound = true;
 
@@ -206,7 +212,9 @@ private Text ItemSaleError;
     }
 
 
-    public void ItemSaleEnd(ActionEvent e) throws SQLException {
+
+
+    public void ItemSaleEnd() throws SQLException {
         String CurrentItem;
         double SaleWorth = 0;
 
@@ -362,8 +370,7 @@ private TextField Sale_Value;
 
     }
 
-    public void employe_Start() throws IOException { //this is the start of the gui and login menu
-
+    public void employe_Start() throws IOException { //this is the start of the gui for the staff menu
         Stage Staff_Menu = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Staff_Menu.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 620, 640);
@@ -380,6 +387,44 @@ private TextField Sale_Value;
         Staff_Menu.setTitle("Hello");
         Staff_Menu.setScene(scene);
         Staff_Menu.show();
+    }
+
+    public void Create_ItemRestrictedPage() throws IOException { //this is in case a item is age resitricted it creates the menu speretly so it can be closed if they are over the limit
+        Stage Staff_Menu = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RestrictedItem.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+        Staff_Menu.setTitle("Restricted Item");
+        Staff_Menu.setScene(scene);
+        Staff_Menu.show();
+
+    }
+
+    @FXML
+    Text ItemRestricted_Item;
+    public void ItemRestrctionNO(ActionEvent event ) throws InterruptedException {
+        ItemRestricted_Item.setText("Sale Canceled Will Be Returning you to the Sales page Shortly Thank You");
+
+
+        items.clear();
+        price.clear();
+
+        Thread.sleep(3000);
+
+
+        Stage Main_Menu = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        Main_Menu.close();
+
+
+
+    }
+
+    public void ItemRestrictionYes(ActionEvent event){ //if the customer is over the age limit it will close the age restricton Page
+        Stage Main_Menu = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        Main_Menu.close();
+
+
     }
 
 
