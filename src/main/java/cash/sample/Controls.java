@@ -227,7 +227,7 @@ private Text ItemSaleError;
         for(int i = 0;  i < items.size(); i++){
             CurrentItem = items.get(i);
 
-            String Updatesql = "Update items SET Sales_Ammount= Sales_Ammount + 1 WHERE Name=?";
+            String Updatesql = "Update items SET Sales_Ammount= Sales_Ammount + 1,Quantity = Quantity - 1 WHERE Name=?";
 
 
             PreparedStatement preparedStatement = connection.prepareStatement(Updatesql);

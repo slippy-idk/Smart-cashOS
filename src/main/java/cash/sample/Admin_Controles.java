@@ -304,6 +304,52 @@ public class Admin_Controles  {
     }
 
 
+
+
+    @FXML
+    TextField Stock_ItemQuanity;
+    @FXML
+    TextField Stock_ItemName;
+    @FXML
+    Text Stock_ItemError;
+
+    public void Stock_Item_Submit(){ //this is the Handling function for submiting Stocking of an Item
+        try {
+            String Item_Name = Stock_ItemName.getText().toLowerCase();
+            int Stock_Quantity = Integer.parseInt(Stock_ItemQuanity.getText());
+
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:mysql://127.0.0.1:3306/test",
+                    "root",
+                    "1234"
+            );
+            String Sql = "Update items SET Quantity = Quantity + ? WHERE Name=?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(Sql);
+
+            System.out.println(Stock_Quantity);
+
+            preparedStatement.setInt(1, Stock_Quantity);
+            preparedStatement.setString(2,Item_Name);
+
+            Stock_ItemError.setText("Item Stocked");
+
+            preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+
+
+        }catch (NumberFormatException e){ //for checking if the user enterd anything but a number
+            Stock_ItemError.setText("You did not enter a Number Please Enter a Number");
+        } catch (SQLDataException sqlDataException){
+            System.out.println("Item Not Found");
+        } catch (SQLException e) {
+            System.out.println("Error with connecting with server");
+        }
+
+
+    }
+
     public void CreateItem_Menu(ActionEvent event) throws IOException {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow(); //gets the current window to back out
@@ -323,6 +369,7 @@ public class Admin_Controles  {
 
     }
 
+ Version-0.4
     public void DeleteItemMenu() throws IOException {
         Stage Stage_Admin_Menu = new Stage();
 
@@ -335,6 +382,25 @@ public class Admin_Controles  {
     }
 
     public void Backout(ActionEvent e) throws IOException { // this loads back to the login screen
+
+    public void CreateStock_Menu(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow(); //gets the current window to back out
+
+        stage.close();
+
+        Stage CreateItem = new Stage();
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Stock_Item.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+        CreateItem.setTitle("Creation Item");
+        CreateItem.setScene(scene);
+        CreateItem.show();
+
+    }
+
+    public void Backout(ActionEvent e) throws IOException { // this loads back to the login screen tbd refactor name
+ main
         Main main = new Main();
 
 
@@ -350,7 +416,7 @@ public class Admin_Controles  {
     }
 
 
-    public void Back2Menu(ActionEvent e) throws IOException { //returns the user back to menu
+    public void Back2Menu(ActionEvent e) throws IOException { //returns the user back to menu tbd refactor name
 
         Stage Stage_Admin_Menu = new Stage();
 
