@@ -200,6 +200,46 @@ public class Admin_Controles  {
 
     }
 
+
+    @FXML
+    TextField Delete_ItemText;
+
+    @FXML
+    Text DeleteItemError;
+    public void Delete_Item() throws SQLException { //deletes an Item
+
+
+        Connection connection = DriverManager.getConnection( //creates connection with the sql databse
+                "jdbc:mysql://127.0.0.1:3306/test",
+                "root",
+                "1234"
+        );
+
+        String sql = "DELETE FROM items WHERE Name =  ?";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        preparedStatement.setString(1,Delete_ItemText.getText().toLowerCase());
+
+
+
+           int affectedRows = preparedStatement.executeUpdate();
+
+        if (affectedRows == 1) {
+            DeleteItemError.setText("Deleted Item");
+        } else if (affectedRows == 0) {
+            DeleteItemError.setText("Item not Found");
+        } else {
+            DeleteItemError.setText("There was an unexcpected Item");
+        }
+
+
+
+
+
+
+    }
+
     public void View_Account() throws IOException {
         Stage Stage_Admin_Login = new Stage();
 
@@ -281,6 +321,17 @@ public class Admin_Controles  {
 
 
 
+    }
+
+    public void DeleteItemMenu() throws IOException {
+        Stage Stage_Admin_Menu = new Stage();
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_DeleteITem.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+        Stage_Admin_Menu.setTitle("Delete Item");
+        Stage_Admin_Menu.setScene(scene);
+        Stage_Admin_Menu.show();
     }
 
     public void Backout(ActionEvent e) throws IOException { // this loads back to the login screen
