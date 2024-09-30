@@ -31,7 +31,7 @@ public long Start_Shift; //gets the user current starting time as of shift for u
     public void Admin(ActionEvent e){ //used to load the admin menu
         Stage Admin_Menu = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Admin_Menu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Admin_Menu2.fxml"));
         Scene scene;
         try {
             scene = new Scene(fxmlLoader.load(), 620, 640);
