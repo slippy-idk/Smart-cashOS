@@ -171,7 +171,7 @@ public class Admin_Controles  {
             );
 
 
-            String insert = "INSERT INTO items  (Name, Price, Restricted_Item)" + //inserts the new item into the databse
+            String insert = "INSERT INTO items  (Name, Price, Restricted)" + //inserts the new item into the databse
                     "VALUES (?, ?, ?)";
 
 
@@ -369,7 +369,7 @@ public class Admin_Controles  {
 
     }
 
- Version-0.4
+
     public void DeleteItemMenu() throws IOException {
         Stage Stage_Admin_Menu = new Stage();
 
@@ -381,7 +381,7 @@ public class Admin_Controles  {
         Stage_Admin_Menu.show();
     }
 
-    public void Backout(ActionEvent e) throws IOException { // this loads back to the login screen
+
 
     public void CreateStock_Menu(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow(); //gets the current window to back out
@@ -400,7 +400,7 @@ public class Admin_Controles  {
     }
 
     public void Backout(ActionEvent e) throws IOException { // this loads back to the login screen tbd refactor name
- main
+
         Main main = new Main();
 
 

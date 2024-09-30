@@ -7,9 +7,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 /**
- * @author Lewis Perry Nickname = Slippy
+ * @author Lewis Perry ||| Nickname = Slippy
  *
- * @version 0.01
+ * @version 0.43
  *
  * */
 
