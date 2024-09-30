@@ -416,11 +416,12 @@ public class Admin_Controles  {
     }
 
 
+
     public void Back2Menu(ActionEvent e) throws IOException { //returns the user back to menu tbd refactor name
 
         Stage Stage_Admin_Menu = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_Menu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_Menu2.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 620, 640);
         Stage_Admin_Menu.setTitle("Admin Menu");
         Stage_Admin_Menu.setScene(scene);
