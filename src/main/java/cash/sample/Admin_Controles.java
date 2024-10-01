@@ -429,7 +429,34 @@ public class Admin_Controles  {
 
         Stage Current = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Current.close();
+    }
 
+    public void backtoUserMenu(ActionEvent e) throws IOException {
+        Stage Stage_Admin_Menu = new Stage();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_Main_Menu.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+        Stage_Admin_Menu.setTitle("Admin Menu");
+        Stage_Admin_Menu.setScene(scene);
+        Stage_Admin_Menu.show();
+
+        Stage Current = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Current.close();
+
+
+    }
+
+    public void Create_SettingsMenu(ActionEvent e) throws IOException {
+        Stage Stage_Admin_Menu = new Stage();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(".fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+        Stage_Admin_Menu.setTitle("Admin Menu");
+        Stage_Admin_Menu.setScene(scene);
+        Stage_Admin_Menu.show();
+
+        Stage Current = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Current.close();
 
     }
 

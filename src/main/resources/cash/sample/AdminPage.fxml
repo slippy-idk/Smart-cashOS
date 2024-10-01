@@ -11,6 +11,6 @@
       <Button layoutX="247.0" layoutY="143.0" mnemonicParsing="false" onAction="#DeleteItemMenu" prefHeight="39.0" prefWidth="106.0" text="Delete Item" />
       <Button layoutX="247.0" layoutY="200.0" mnemonicParsing="false" onAction="#Create_Account" prefHeight="39.0" prefWidth="106.0" text="Create Account" />
       <Button layoutX="247.0" layoutY="253.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="106.0" text="View Account" />
-      <Button layoutX="247.0" layoutY="346.0" mnemonicParsing="false" onAction="#Back2Menu" prefHeight="39.0" prefWidth="106.0" text="Exit" />
+      <Button layoutX="247.0" layoutY="346.0" mnemonicParsing="false" onAction="#backtoUserMenu" prefHeight="39.0" prefWidth="106.0" text="Exit" />
    </children>
 </AnchorPane>
