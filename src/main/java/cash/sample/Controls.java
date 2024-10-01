@@ -31,7 +31,7 @@ public long Start_Shift; //gets the user current starting time as of shift for u
     public void Admin(ActionEvent e){ //used to load the admin menu
         Stage Admin_Menu = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("Admin_Menu2.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(User.class.getResource("AdminPage.fxml"));
         Scene scene;
         try {
             scene = new Scene(fxmlLoader.load(), 620, 640);
@@ -43,6 +43,8 @@ public long Start_Shift; //gets the user current starting time as of shift for u
         Admin_Menu.show();
 
     }
+
+
 
 //the fxml before are to accesss the boxex in the login  screen
     @FXML

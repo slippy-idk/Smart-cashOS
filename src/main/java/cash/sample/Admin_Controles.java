@@ -421,7 +421,7 @@ public class Admin_Controles  {
 
         Stage Stage_Admin_Menu = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_Menu2.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AdminPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 620, 640);
         Stage_Admin_Menu.setTitle("Admin Menu");
         Stage_Admin_Menu.setScene(scene);

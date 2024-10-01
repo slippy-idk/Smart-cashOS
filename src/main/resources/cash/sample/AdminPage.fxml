@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cash.sample.Admin_Controles">
+   <children>
+      <Button layoutX="14.0" layoutY="346.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="122.0" text="Settings" />
+      <Button layoutX="247.0" layoutY="32.0" mnemonicParsing="false" onAction="#CreateItem_Menu" prefHeight="39.0" prefWidth="106.0" text="Create Item" />
+      <Button layoutX="247.0" layoutY="86.0" mnemonicParsing="false" onAction="#CreateStock_Menu" prefHeight="39.0" prefWidth="106.0" text="Stock Item" />
+      <Button layoutX="247.0" layoutY="143.0" mnemonicParsing="false" onAction="#DeleteItemMenu" prefHeight="39.0" prefWidth="106.0" text="Delete Item" />
+      <Button layoutX="247.0" layoutY="200.0" mnemonicParsing="false" onAction="#Create_Account" prefHeight="39.0" prefWidth="106.0" text="Create Account" />
+      <Button layoutX="247.0" layoutY="253.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="106.0" text="View Account" />
+      <Button layoutX="247.0" layoutY="346.0" mnemonicParsing="false" onAction="#Back2Menu" prefHeight="39.0" prefWidth="106.0" text="Exit" />
+   </children>
+</AnchorPane>
