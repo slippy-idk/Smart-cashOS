@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import javafx.scene.control.TextField;
@@ -43,6 +44,8 @@ public long Start_Shift; //gets the user current starting time as of shift for u
         Admin_Menu.show();
 
     }
+
+
 
 
 
@@ -386,9 +389,36 @@ private TextField Sale_Value;
         Stage Staff_Menu = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_Main_Menu.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+
+
         Staff_Menu.setTitle("Hello");
         Staff_Menu.setScene(scene);
         Staff_Menu.show();
+    }
+
+    @FXML Button Admin_StockAlert;
+    public void CheckquanityAlert() throws SQLException {
+        //checks to see if the quanity is good
+
+        Connection connection = DriverManager.getConnection( //creates connection with the sql databse
+                "jdbc:mysql://127.0.0.1:3306/test",
+                "root",
+                "1234"
+        );
+
+        String get_Items = "SELECT ";
+        String Get_Alert = "";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(get_Items);
+        PreparedStatement get_Alert = connection.prepareStatement(Get_Alert);
+
+
+
+
+
+
+
+
     }
 
     public void Create_ItemRestrictedPage() throws IOException { //this is in case a item is age resitricted it creates the menu speretly so it can be closed if they are over the limit
