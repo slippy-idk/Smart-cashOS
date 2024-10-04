@@ -395,7 +395,7 @@ private TextField Sale_Value;
         Staff_Menu.setScene(scene);
         Staff_Menu.show();
 
-//        CheckquanityAlert();
+        CheckquanityAlert();
     }
 ArrayList<String> ItemAlert = new ArrayList<>();
     @FXML Button Admin_StockAlert;
@@ -423,13 +423,15 @@ ArrayList<String> ItemAlert = new ArrayList<>();
             int Quanity = resultSet.getInt("Quantity");
             int alert_Amount = resultSet.getInt("Quanitity_Alert");
 
-            System.out.println("Item:" + item_Name + "is low");
+            System.out.println("Item: " + item_Name + " is low");
 
-            resultSet.close();
-            preparedStatement.close();
-            connection.close();
+
 
         }
+
+        resultSet.close();
+        preparedStatement.close();
+        connection.close();
 
 
 
