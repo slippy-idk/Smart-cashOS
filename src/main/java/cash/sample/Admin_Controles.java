@@ -321,6 +321,51 @@ public class Admin_Controles {
 
     }
 
+    @FXML
+    TextField Alert_Name;
+    @FXML
+    TextField Alert_Quanity;
+    @FXML
+    Text Admin_SettingsError;
+    public void Alert_Qaunity_Submit() throws SQLException { //creates the alert for the user in the item schema
+
+        Connection connection = DriverManager.getConnection(
+                "jdbc:mysql://127.0.0.1:3306/test",
+                "root",
+                "1234"
+        );
+
+        try {
+            String ItemAmount = StockAlert_ItemAmmount.getText().toLowerCase();
+            int itemamount2 = Integer.parseInt(ItemAmount);
+//            String sql = "INSERT into alertitems (Name,AlertValue) " +
+//                    "VALUES (?,?)";
+
+            String sql = "UPDATE items SET Quanitity_Alert = ? WHERE Name=?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, StockAlert_ItemName.getText());
+            preparedStatement.setInt(2, itemamount2);
+
+
+            int affectedRows = preparedStatement.executeUpdate();
+            preparedStatement.close();
+            if (affectedRows > 0) {
+                Stock_ItemError.setText("Stock alert Added");
+            } else {
+                Stock_ItemError.setText("Item already exsists");
+            }
+        } catch (NumberFormatException e) {
+            Stock_ItemError.setText("Pleas enter a number");
+        }
+
+
+
+
+
+    }
+
 
     @FXML
     Text StockAlert_Error;
@@ -345,26 +390,67 @@ public class Admin_Controles {
 
 
         try {
-            String sql = "INSERT into alertitems (Name,AlertValue) " +
-                    "VALUES (?,?)";
+//            String sql = "INSERT into alertitems (Name,AlertValue) " +
+//                    "VALUES (?,?)";
+
+            String sql = "UPDATE items SET Quanitity_Alert = ? WHERE Name=?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setString(1, StockAlert_ItemName.getText());
-            preparedStatement.setInt(2, itemamount2);
+            preparedStatement.setString(2, StockAlert_ItemName.getText().toLowerCase());
+            preparedStatement.setInt(1, itemamount2);
 
 
             int affectedRows = preparedStatement.executeUpdate();
-            preparedStatement.close();
             if (affectedRows > 0) {
                 Stock_ItemError.setText("Stock alert Added");
+                preparedStatement.close();
+                connection.close();
+
             } else {
-                Stock_ItemError.setText("Item already exsists");
+                Stock_ItemError.setText("Item Not found");
+                preparedStatement.close();
+                connection.close();
+
             }
         } catch (NumberFormatException e) {
             Stock_ItemError.setText("Pleas enter a number");
         }
 
+
+
+    }
+
+    public void createSettings_Menu(ActionEvent e) throws IOException {
+
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow(); //gets the current window to back out
+
+        stage.close();
+
+        Stage CreateItem = new Stage();
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_Settings.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+        CreateItem.setTitle("Creation Item");
+        CreateItem.setScene(scene);
+        CreateItem.show();
+
+    }
+
+    public void create_QuanityAlert(ActionEvent e) throws IOException {
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow(); //gets the current window to back out
+
+        stage.close();
+
+        Stage CreateItem = new Stage();
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_StockAlert.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 640);
+        CreateItem.setTitle("Creation Item");
+        CreateItem.setScene(scene);
+        CreateItem.show();
 
     }
 

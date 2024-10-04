@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cash.sample.Admin_Controles">
+   <children>
+      <Button layoutX="248.0" layoutY="48.0" mnemonicParsing="false" onAction="#create_QuanityAlert" prefHeight="44.0" prefWidth="103.0" text="Stock Alerts" />
+      <Button layoutX="14.0" layoutY="342.0" mnemonicParsing="false" onAction="#Backout" prefHeight="44.0" prefWidth="103.0" text="Exit" />
+   </children>
+</AnchorPane>

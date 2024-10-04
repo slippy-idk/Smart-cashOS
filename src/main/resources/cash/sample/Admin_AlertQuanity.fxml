@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cash.sample.Admin_Controles">
+   <children>
+      <TextField fx:id="Alert_Name" layoutX="226.0" layoutY="59.0" />
+      <TextField fx:id="Alert_Quanity" layoutX="227.0" layoutY="175.0" />
+      <Text layoutX="174.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter the Item you wish to set an alert for" />
+      <Text layoutX="132.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter the quanity you wish to be alrted when on or under" />
+      <Text fx:id="Admin_SettingsError" layoutX="289.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Button layoutX="243.0" layoutY="245.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="117.0" text="Done" />
+      <Button layoutX="243.0" layoutY="306.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="117.0" text="Back to menu" />
+   </children>
+</AnchorPane>

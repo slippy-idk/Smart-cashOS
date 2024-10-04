@@ -384,7 +384,7 @@ private TextField Sale_Value;
         Staff_Menu.show();
     }
 
-    public void Admin_Start( ) throws IOException { //this is the start of the gui and login menu
+    public void Admin_Start( ) throws IOException, SQLException { //this is the start of the gui and login menu
 
         Stage Staff_Menu = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin_Main_Menu.fxml"));
@@ -394,8 +394,10 @@ private TextField Sale_Value;
         Staff_Menu.setTitle("Hello");
         Staff_Menu.setScene(scene);
         Staff_Menu.show();
-    }
 
+//        CheckquanityAlert();
+    }
+ArrayList<String> ItemAlert = new ArrayList<>();
     @FXML Button Admin_StockAlert;
     public void CheckquanityAlert() throws SQLException {
         //checks to see if the quanity is good
@@ -406,11 +408,32 @@ private TextField Sale_Value;
                 "1234"
         );
 
-        String get_Items = "SELECT ";
+        String get_Items = "SELECT * FROM items WHERE Quantity < Quanitity_Alert";
         String Get_Alert = "";
 
         PreparedStatement preparedStatement = connection.prepareStatement(get_Items);
-        PreparedStatement get_Alert = connection.prepareStatement(Get_Alert);
+//        PreparedStatement get_Alert = connection.prepareStatement(Get_Alert);
+//
+//        preparedStatement.executeUpdate();
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()){
+            String item_Name = resultSet.getString("Name");
+            int Quanity = resultSet.getInt("Quantity");
+            int alert_Amount = resultSet.getInt("Quanitity_Alert");
+
+            System.out.println("Item:" + item_Name + "is low");
+
+            resultSet.close();
+            preparedStatement.close();
+            connection.close();
+
+        }
+
+
+
+
 
 
 
